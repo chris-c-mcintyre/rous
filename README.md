@@ -1,2 +1,5 @@
-# rous
-Ridiculously Overengineered Utility Suite
+# Ridiculously Overengineered Utility Suite
+
+Doing things the hard way.
+
+🌹🐀
