@@ -1,0 +1,19 @@
+{
+  "name": "rous",
+  "version": "0.1.0",
+  "description": "Doing things the hard way.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chris-c-mcintyre/rous.git"
+  },
+  "author": "chris-c-mcintyre",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chris-c-mcintyre/rous/issues"
+  },
+  "homepage": "https://github.com/chris-c-mcintyre/rous#readme"
+}
