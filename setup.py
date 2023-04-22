@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name="rous",
@@ -12,6 +12,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    packages=find_packages(),
+    packages=["rous"],
+    package_dir={"rous": "src/rous"},
     install_requires=[""],
 )
