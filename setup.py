@@ -23,5 +23,6 @@ setup(
     ],
     packages=["rous"],
     package_dir={"rous": "src/rous"},
+    package_data={"rous": ["data/balance.*"]},
     install_requires=[""],
 )
