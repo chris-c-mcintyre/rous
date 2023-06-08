@@ -54,6 +54,20 @@ generateDocumentFavicon
   }
 );
 
+let myDisplayObject = generateDisplayObject
+(
+  [],
+  {
+    "layers": ["base", "edge", "node", "event"]
+  }
+);
+
+renderDisplayObject
+(
+  [ myDisplayObject ],
+  {}
+);
+
 /* output */
 
 console.log("🌹🐀");
