@@ -30,6 +30,26 @@ function generateDocumentFavicon( jsArgs, jsKwargs )
   );
 }
 
+/* program */
+
+generateDocumentTitle
+(
+  [],
+  {
+    text: "R.O.U.S.",
+    space: " ",
+    icon: Math.random() >= 0.96 ? "🐀" : "🌹"
+  }
+);
+
+generateDocumentFavicon
+(
+  [],
+  {
+    icon: Math.random() >= 0.96 ? "🐀" : "🌹"
+  }
+);
+
 /* output */
 
 console.log("🌹🐀");
