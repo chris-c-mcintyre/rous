@@ -1,0 +1,12 @@
+body {
+  font-family: "Monaco", "Courier New", monospace;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
