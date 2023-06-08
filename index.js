@@ -1,3 +1,7 @@
+/* module imports */
+
+import { generateDisplayObject, renderDisplayObject } from "./src/rous/api/canvas.js";
+
 /* setup functions */
 
 function generateDocumentTitle( jsArgs, jsKwargs )
