@@ -31,7 +31,7 @@ function generateDisplayObject( jsArgs, jsKwargs )
 
   for (let i = 0; i < layerList.length; i++)
   {
-    let newLayer = generateDisplayLayer( [], { "layer": layerList[i], "index": i });
+    let newLayer = generateDisplayLayer( [ layerList[i], i ], {} );
     displayObject.layers[i] = newLayer;
   }
 
