@@ -12,6 +12,7 @@
   },
   "author": "chris-c-mcintyre",
   "license": "MIT",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/chris-c-mcintyre/rous/issues"
   },
