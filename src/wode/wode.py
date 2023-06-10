@@ -30,7 +30,9 @@ data_path = os.path.join(code_fold, data_fold + path_splitter + data_file)
 with open(data_path, "r") as dictionary_file:
   dictionary_dict = json.load(dictionary_file)
 
-wode_dictionary = dictionary_dict
+filtered_grades = dict(filter(my_filtering_function, grades.items()))
+
+wode_dictionary = dict(filter(None, dictionary_dict.items()))
 
 wode_reference = list(wode_dictionary.keys())
 
