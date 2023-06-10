@@ -22,7 +22,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     packages=["rous"],
-    package_dir={"rous": "src/rous"},
+    package_dir={"rous": "src/rous", "wode": "src/wode"},
     package_data={"rous": ["data/balance.*"]},
     install_requires=[""],
 )
