@@ -60,6 +60,13 @@ def word( unix_time_s = None ):
 
     unix_time_s = time.time()
 
+  if unix_time_s is float("inf"):
+
+    last_word = wode_reference[-1]
+    last_defn = wode_dictionary[ last_word ]
+
+    return ( last_word, last_defn )
+
   reference_time = math.floor( unix_time_s / daily_seconds )
 
   reference_index = reference_time % len(wode_reference)
