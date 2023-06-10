@@ -14,10 +14,14 @@ minutely_seconds = 60
 
 daily_seconds = minutely_seconds * hourly_minutes * daily_hours # ~86400
 
+linux_supremacy = True
+
 is_linux = os.uname().sysname == "Linux"
 
 if is_linux:
   path_splitter = "/"
+elif not linux_supremacy:
+  path_splitter = os.sep
 else:
   raise ZeroDivisionError("Not dealing with your fringe non-linux esoteria, today.")
 
