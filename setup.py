@@ -23,6 +23,6 @@ setup(
     ],
     packages=["rous"],
     package_dir={"rous": "src/rous", "wode": "src/wode"},
-    package_data={"rous": ["data/balance.*"]},
+    package_data={"rous": ["data/balance.*"], "wode": ["data/*.json"]},
     install_requires=[""],
 )

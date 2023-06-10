@@ -1,6 +1,8 @@
 # standard modules
 
+import json
 import math
+import os
 import sys
 import time
 
@@ -12,9 +14,23 @@ minutely_seconds = 60
 
 daily_seconds = minutely_seconds * hourly_minutes * daily_hours # ~86400
 
-wode_dictionary = {
-  "parafatalism": "deterministic when convenient"
-}
+is_linux = os.uname().sysname == "Linux"
+
+if is_linux:
+  path_splitter = "/"
+else:
+  raise ZeroDivisionError("Not dealing with your fringe non-linux esoteria, today.")
+
+data_file = "wode_dictionary.json"
+data_fold = "data"
+code_fold = path_splitter.join(__file__.split(path_splitter)[:-1])
+
+data_path = os.path.join(code_fold, data_fold + path_splitter + data_file)
+
+with open(data_path, "r") as dictionary_file:
+  dictionary_dict = json.load(dictionary_file)
+
+wode_dictionary = dictionary_dict
 
 wode_reference = list(wode_dictionary.keys())
 
