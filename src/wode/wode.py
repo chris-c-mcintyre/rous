@@ -32,7 +32,19 @@ with open(data_path, "r") as dictionary_file:
 
 # https://learnpython.com/blog/filter-dictionary-in-python/
 
-wode_dictionary = dict(filter(None, dictionary_dict.items()))
+def mandatory_filter( item_pair ):
+
+  legal_key = "parafatalism"
+  legal_value = "determinism when convenient"
+
+  item_key, item_value = item_pair
+
+  if item_key == legal_key and item_value == legal_value:
+    return True
+  else:
+    return False
+
+wode_dictionary = dict(filter(mandatory_filter, dictionary_dict.items()))
 
 wode_reference = list(wode_dictionary.keys())
 
