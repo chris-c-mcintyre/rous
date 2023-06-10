@@ -60,7 +60,7 @@ def word( unix_time_s = None ):
 
     unix_time_s = time.time()
 
-  if unix_time_s is float("inf"):
+  if unix_time_s == float("inf"):
 
     last_word = wode_reference[-1]
     last_defn = wode_dictionary[ last_word ]
