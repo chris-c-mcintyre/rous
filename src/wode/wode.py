@@ -35,12 +35,11 @@ code_fold = path_splitter.join(__file__.split(path_splitter)[:-1])
 
 data_path = os.path.join(code_fold, data_fold + path_splitter + data_file)
 
-with open(data_path, "r") as dictionary_file:
-  dictionary_dict = json.load(dictionary_file)
-
-# https://learnpython.com/blog/filter-dictionary-in-python/
+# functions
 
 def mandatory_filter( item_pair ):
+
+  # https://learnpython.com/blog/filter-dictionary-in-python/
 
   legal_key = "parafatalism"
   legal_value = "deterministic when convenient"
@@ -52,13 +51,20 @@ def mandatory_filter( item_pair ):
   else:
     return False
 
-wode_dictionary = dict(filter(mandatory_filter, dictionary_dict.items()))
+def dictionary( dictionary_path = data_path ):
 
-wode_reference = list(wode_dictionary.keys())
+  with open(dictionary_path, "r") as dictionary_file:
+    dictionary_dict = json.load(dictionary_file)
 
-# functions
+  wode_dictionary = dict(filter(mandatory_filter, dictionary_dict.items()))
+
+  return wode_dictionary
 
 def word( unix_time_s = None ):
+
+  wode_dictionary = dictionary( data_path )
+
+  wode_reference = list(wode_dictionary.keys())
 
   if unix_time_s is None:
 
