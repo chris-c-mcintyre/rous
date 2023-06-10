@@ -24,6 +24,6 @@ setup(
     packages=["rous", "wode"],
     package_dir={"rous": "src/rous", "wode": "src/wode"},
     package_data={"rous": ["data/balance.*", "data/*.json"], "wode": ["data/*.json"]},
-    install_requires=[""],
+    install_requires=["nltk"],
     test_suite = "test",
 )

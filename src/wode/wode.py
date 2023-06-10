@@ -6,6 +6,10 @@ import os
 import sys
 import time
 
+# pypi modules
+
+import nltk
+
 # environment
 
 daily_hours = 24
