@@ -6,9 +6,9 @@ import time
 
 # environment
 
-minutely_seconds = 60
-hourly_minutes = 60
 daily_hours = 24
+hourly_minutes = 60
+minutely_seconds = 60
 
 daily_seconds = minutely_seconds * hourly_minutes * daily_hours # ~86400
 
