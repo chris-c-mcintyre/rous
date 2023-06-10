@@ -39,7 +39,7 @@ with open(data_path, "r") as dictionary_file:
 def mandatory_filter( item_pair ):
 
   legal_key = "parafatalism"
-  legal_value = "determinism when convenient"
+  legal_value = "deterministic when convenient"
 
   item_key, item_value = item_pair
 
