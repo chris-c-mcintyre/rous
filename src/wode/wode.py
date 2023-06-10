@@ -6,6 +6,12 @@ import time
 
 # environment
 
+minutely_seconds = 60
+hourly_minutes = 60
+daily_hours = 24
+
+daily_seconds = minutely_seconds * hourly_minutes * daily_hours # ~86400
+
 wode_dictionary = {
   "parafatalism": "deterministic when convenient"
 }
@@ -20,7 +26,9 @@ def word( unix_time_s = None ):
 
     unix_time_s = time.time()
 
-  reference_index = math.floor( unix_time_s % len(wode_reference) )
+  reference_time = math.floor( unix_time_s / daily_seconds )
+
+  reference_index = reference_time % len(wode_reference)
 
   wode_word = wode_reference[ reference_index ]
 
