@@ -21,7 +21,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    packages=["rous"],
+    packages=["rous", "wode"],
     package_dir={"rous": "src/rous", "wode": "src/wode"},
     package_data={"rous": ["data/balance.*", "data/*.json"], "wode": ["data/*.json"]},
     install_requires=[""],
