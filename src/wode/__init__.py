@@ -1,0 +1,1 @@
+from .wode import word
