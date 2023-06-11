@@ -2,6 +2,8 @@
 
 import { generateDisplayObject, renderDisplayObject } from "./src/rous/api/canvas.js";
 
+import { setupFileUpload } from "./src/rous/api/files.js";
+
 /* setup functions */
 
 function generateDocumentTitle( jsArgs, jsKwargs )
@@ -67,6 +69,8 @@ renderDisplayObject
   [ myDisplayObject ],
   {}
 );
+
+setupFileUpload();
 
 /* output */
 
