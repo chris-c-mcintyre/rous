@@ -56,7 +56,14 @@ def dictionary( dictionary_path = data_path ):
   with open(dictionary_path, "r") as dictionary_file:
     dictionary_dict = json.load(dictionary_file)
 
-  wode_dictionary = dict(filter(mandatory_filter, dictionary_dict.items()))
+  wode_items = dictionary_dict.items()
+
+  filter_list = [ mandatory_filter ]
+
+  for filter_function in filter_list:
+    wode_items = filter(filter_function, wode_items)
+
+  wode_dictionary = dict(wode_items)
 
   return wode_dictionary
 
