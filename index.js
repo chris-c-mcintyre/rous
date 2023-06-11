@@ -1,6 +1,6 @@
 /* module imports */
 
-import { generateDisplayObject, renderDisplayObject } from "./src/rous/api/canvas.js";
+import { generateDisplayObject, renderDisplayObject } from "./src/rous/api/display.js";
 
 import { setupFileUpload } from "./src/rous/api/files.js";
 
