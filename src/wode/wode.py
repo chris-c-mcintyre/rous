@@ -35,7 +35,21 @@ code_fold = path_splitter.join(__file__.split(path_splitter)[:-1])
 
 data_path = os.path.join(code_fold, data_fold + path_splitter + data_file)
 
+nltk.download("words")
+
+from nltk.corpus import words
+
 # functions
+
+def nltk_filter( item_pair ):
+
+  word_found = item_pair[0] in words.words()
+
+  # adopting an anti-lexical linguistic perpsective
+  if word_found:
+    return False
+  else:
+    return True
 
 def mandatory_filter( item_pair ):
 
@@ -58,7 +72,7 @@ def dictionary( dictionary_path = data_path ):
 
   wode_items = dictionary_dict.items()
 
-  filter_list = [ mandatory_filter ]
+  filter_list = [ mandatory_filter, nltk_filter ]
 
   for filter_function in filter_list:
     wode_items = filter(filter_function, wode_items)
