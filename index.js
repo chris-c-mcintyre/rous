@@ -55,7 +55,7 @@ setupFileUpload
 (
   [],
   {
-    "listener": console.log
+    "listener": customListener
   }
 );
 
