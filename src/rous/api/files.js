@@ -1,17 +1,29 @@
 
 /* functions */
 
-function handleReaderLoad( loadEvent )
+function handleReaderLoad( jsArgs, jsKwargs )
 {
+  // jsArgs
+  let loadEvent = jsArgs[0];
+
+  // jsKwargs
+  let listenerFunction = jsKwargs["listener"] ?? console.log;
+
   let inputData = JSON.parse(loadEvent.target.result);
 
-  console.log(inputData);
+  listenerFunction(inputData);
 
   return inputData;
 }
 
-function handleFileChange( changeEvent )
+function handleFileChange( jsArgs, jsKwargs )
 {
+  // jsArgs
+  let changeEvent = jsArgs[0];
+
+  // jsKwargs
+  let listenerArgs = jsKwargs["listener"] ?? {};
+
   let myFiles = changeEvent.target.files;
 
   for (let i = 0; i < myFiles.length; i++)
@@ -20,7 +32,7 @@ function handleFileChange( changeEvent )
     let currentFileReader = new FileReader();
     currentFileReader.onload = function(loadEvent)
     {
-      handleReaderLoad(loadEvent, {});
+      handleReaderLoad( [ loadEvent ], listenerArgs );
     };
     currentFileReader.readAsText(currentFile);
   }
@@ -31,9 +43,12 @@ function fileUploadListener( jsArgs, jsKwargs )
   // jsArgs
   let inputElement = document.getElementById( jsArgs[0] );
 
+  // jsKwargs
+  let listenerArgs = jsKwargs["listener"] ?? {};
+
   let inputListener = inputElement.addEventListener("change", function(changeEvent)
   {
-    handleFileChange( changeEvent, {} );
+    handleFileChange( [ changeEvent ], listenerArgs );
   });
 
   return inputListener;
