@@ -32,7 +32,7 @@ function handleFileChange( jsArgs, jsKwargs )
     let currentFileReader = new FileReader();
     currentFileReader.onload = function(loadEvent)
     {
-      handleReaderLoad( [ loadEvent ], listenerArgs );
+      handleReaderLoad( [ loadEvent ], { "listener": listenerArgs } );
     };
     currentFileReader.readAsText(currentFile);
   }
@@ -48,7 +48,7 @@ function fileUploadListener( jsArgs, jsKwargs )
 
   let inputListener = inputElement.addEventListener("change", function(changeEvent)
   {
-    handleFileChange( [ changeEvent ], listenerArgs );
+    handleFileChange( [ changeEvent ], { "listener": listenerArgs } );
   });
 
   return inputListener;
@@ -90,7 +90,7 @@ function setupFileUpload( jsArgs, jsKwargs )
 
   renderFileUpload( myFileUploadElements, renderArgs );
 
-  fileUploadListener( [ myFileUploadElements[0].id ], listenerArgs );
+  fileUploadListener( [ myFileUploadElements[0].id ], { "listener": listenerArgs } );
 }
 
 export { handleReaderLoad, handleFileChange, fileUploadListener, generateFileUpload, renderFileUpload, setupFileUpload };
