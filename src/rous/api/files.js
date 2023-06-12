@@ -18,7 +18,10 @@ function handleFileChange( changeEvent )
   {
     let currentFile = myFiles[i];
     let currentFileReader = new FileReader();
-    currentFileReader.onload = handleReaderLoad;
+    currentFileReader.onload = function(loadEvent)
+    {
+      handleReaderLoad(loadEvent, {});
+    };
     currentFileReader.readAsText(currentFile);
   }
 }
@@ -28,7 +31,10 @@ function fileUploadListener( jsArgs, jsKwargs )
   // jsArgs
   let inputElement = document.getElementById( jsArgs[0] );
 
-  let inputListener = inputElement.addEventListener("change", handleFileChange);
+  let inputListener = inputElement.addEventListener("change", function(changeEvent)
+  {
+    handleFileChange( changeEvent, {} );
+  });
 
   return inputListener;
 }
