@@ -4,6 +4,19 @@ import { generateDocumentTitle, generateDocumentFavicon, generateDisplayObject, 
 
 import { setupFileUpload } from "./src/rous/api/files.js";
 
+/* functions */
+
+function customListener( dataJson )
+{
+  let keyCounter = 0;
+
+  for (let jsonKey in dataJson)
+  {
+    keyCounter += 1;
+    console.log(keyCounter, ":", jsonKey, ":", dataJson[jsonKey]);
+  }
+}
+
 /* program */
 
 generateDocumentTitle
