@@ -6,14 +6,29 @@ import { setupFileUpload } from "./src/rous/api/files.js";
 
 /* functions */
 
-function customListener( dataJson )
+function customListener( dataJson, displayObject )
 {
-  let keyCounter = 0;
+  let inputType = Object.prototype.toString.call(dataJson).slice("[object ".length, -1).toLowerCase();
 
-  for (let jsonKey in dataJson)
+  switch ( inputType )
   {
-    keyCounter += 1;
-    console.log(keyCounter, ":", jsonKey, ":", dataJson[jsonKey]);
+    case "array":
+      for (let i = 0; i < dataJson.length; i++)
+      {
+        console.log({ "index": i, "value": dataJson[i] });
+      }
+      break;
+    case "object":
+      for (let jsonKey in dataJson)
+      {
+        console.log({ "key": jsonKey, "value": dataJson[jsonKey] });
+      }
+      break;
+    case "string":
+      console.log({ "string": dataJson });
+      break;
+    default:
+      throw new TypeError("File contents not recognizable as JSON (at least, not to me).");
   }
 }
 
@@ -55,7 +70,7 @@ setupFileUpload
 (
   [],
   {
-    "listener": customListener
+    "listener": [ customListener, myDisplayObject ]
   }
 );
 
