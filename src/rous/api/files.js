@@ -7,13 +7,12 @@ function handleReaderLoad( jsArgs, jsKwargs )
   let loadEvent = jsArgs[0];
 
   // jsKwargs
-  let listenerFunction = jsKwargs["listener"] ?? console.log;
+  let listenerFunction = (jsKwargs["listener"] && jsKwargs["listener"][0]) ? jsKwargs["listener"][0] : console.log;
+  let displayObject = (jsKwargs["listener"] && jsKwargs["listener"][1]) ? jsKwargs["listener"][1] : null;
 
   let inputData = JSON.parse(loadEvent.target.result);
 
-  listenerFunction(inputData);
-
-  return inputData;
+  listenerFunction(inputData, displayObject);
 }
 
 function handleFileChange( jsArgs, jsKwargs )
@@ -23,6 +22,7 @@ function handleFileChange( jsArgs, jsKwargs )
 
   // jsKwargs
   let listenerArgs = jsKwargs["listener"] ?? {};
+  let displayObject = jsKwargs["display"] ?? null;
 
   let myFiles = changeEvent.target.files;
 
