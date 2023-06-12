@@ -66,11 +66,16 @@ function renderFileUpload( jsArgs, jsKwargs )
 
 function setupFileUpload( jsArgs, jsKwargs )
 {
-  let myFileUploadElements = generateFileUpload( [], {} );
+  // jsKwargs
+  let generateArgs = jsKwargs["generate"] ?? {};
+  let renderArgs = jsKwargs["render"] ?? {};
+  let listenerArgs = jsKwargs["listener"] ?? {};
 
-  renderFileUpload( myFileUploadElements, {} );
+  let myFileUploadElements = generateFileUpload( [], generateArgs );
 
-  fileUploadListener( [ myFileUploadElements[0].id ], {} );
+  renderFileUpload( myFileUploadElements, renderArgs );
+
+  fileUploadListener( [ myFileUploadElements[0].id ], listenerArgs );
 }
 
 export { handleReaderLoad, handleFileChange, fileUploadListener, generateFileUpload, renderFileUpload, setupFileUpload };
