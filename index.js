@@ -38,7 +38,13 @@ renderDisplayObject
   {}
 );
 
-setupFileUpload();
+setupFileUpload
+(
+  [],
+  {
+    "listener": console.log
+  }
+);
 
 /* output */
 
