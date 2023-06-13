@@ -1,6 +1,30 @@
 
 /* draw functions */
 
+function drawNode( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let displayCanvasContext = jsArgs[0];
+  let displayNodeInstance = jsArgs[1];
+
+  displayCanvasContext.beginPath( );
+
+  displayCanvasContext.strokeStyle = displayEdgeInstance.style.border.color;
+  displayCanvasContext.lineWidth = displayEdgeInstance.style.border.width;
+  displayCanvasContext.fillStyle = displayEdgeInstance.style.color;
+
+  displayCanvasContext.arc
+  (
+    displayNodeInstance.position.x,
+    displayNodeInstance.position.y,
+    displayNodeInstance.style.width,
+    0,
+    2 * Math.PI
+  );
+
+  displayCanvasContext.stroke( );
+}
+
 function drawEdge( jsArgs, jsKwargs )
 {
   // jsArgs
