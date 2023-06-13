@@ -1,0 +1,47 @@
+[
+  [
+    { "number": 1, "power": 0, "value": 1 },
+    { "number": 1, "power": 1, "value": 1 },
+    { "number": 1, "power": 2, "value": 1 },
+    { "number": 1, "power": 3, "value": 1 },
+    { "number": 1, "power": 4, "value": 1 },
+    { "number": 1, "power": 5, "value": 1 }
+  ],
+  [
+    { "number": 2, "power": 0, "value": 1 },
+    { "number": 2, "power": 1, "value": 2 },
+    { "number": 2, "power": 2, "value": 4 },
+    { "number": 2, "power": 3, "value": 8 },
+    { "number": 2, "power": 4, "value": 16 },
+    { "number": 2, "power": 5, "value": 32 }
+  ],
+  [
+    { "number": 3, "power": 0, "value": 1 },
+    { "number": 3, "power": 1, "value": 3 },
+    { "number": 3, "power": 2, "value": 9 },
+    { "number": 3, "power": 3, "value": 27 },
+    { "number": 3, "power": 4, "value": 81 },
+    { "number": 3, "power": 5, "value": 243 }
+  ],
+  [
+    { "number": 4, "power": 0, "value": 1 },
+    { "number": 4, "power": 1, "value": 4 },
+    { "number": 4, "power": 2, "value": 16 },
+    { "number": 4, "power": 3, "value": 64 },
+    { "number": 4, "power": 4, "value": 256 },
+    { "number": 4, "power": 5, "value": 1024 }
+  ],
+  [
+    { "number": 5, "power": 0, "value": 1 },
+    { "number": 5, "power": 1, "value": 5 },
+    { "number": 5, "power": 2, "value": 25 },
+    { "number": 5, "power": 3, "value": 125 },
+    { "number": 5, "power": 4, "value": 625 },
+    { "number": 5, "power": 5, "value": 3125 }
+  ],
+  { "number": 6, "power": 4, "value": 1296 },
+  { "number": 7, "power": 3, "value": 343 },
+  { "number": 8, "power": 2, "value": 64 },
+  { "number": 9, "power": 1, "value": 9 },
+  { "number": 10, "power": 0, "value": 1 }
+]

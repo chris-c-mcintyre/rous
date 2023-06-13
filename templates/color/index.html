@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <title>Style Template Test Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="color.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.25.0/cytoscape.min.js"></script>
+  </head>
+
+  <body>
+
+    <div id="testzone">
+
+      <div style="display:none;">
+
+        <hr />
+
+        <div class="flex">
+          <p>
+            <label for="face-config-test-toggle-alt">Toggle</label><br />
+            <input type="checkbox" id="face-config-test-toggle-alt" onclick="toggleConfig('face-config-test');" checked disabled>
+            <select name="face-config-test-select" id="face-config-test-select" disabled>
+              <option value="" disabled selected hidden></option>
+              <option value="value">Value</option>
+              <option value="random">Random</option>
+              <optgroup label="Dataset Keys">
+                <option value="key">Data Key</option>
+              </optgroup>
+            </select>
+          </p>
+          <hr />
+          <p>
+            <label for="load-test-file">File</label><br />
+            <button id="load-test-file" onclick="loadNetworkFromFile();" disabled>Load Test File</button>
+          </p>
+          <hr />
+          <p>
+            <label for="load-test-dire">Directory</label><br />
+            <button id="load-test-dire" onclick="loadNetworkFromDirectory();" disabled>Load Test Directory</button>
+          </p>
+          <hr />
+          <p>
+            <label for="color-config-toggle-alt">Toggle</label><br />
+            <input type="checkbox" id="color-config-toggle-alt" onclick="toggleConfig('color-config');" checked disabled>
+            <select name="color-config-toggle-select" id="color-config-toggle-select" disabled>
+              <option value="" disabled selected hidden></option>
+              <option value="value">Value</option>
+              <option value="random">Random</option>
+              <optgroup label="Dataset Keys">
+                <option value="key">Data Key</option>
+              </optgroup>
+            </select>
+          </p>
+
+        </div>
+
+        <hr />
+
+      </div>
+
+      <div id="test-display-config" class="flex">
+
+        <fieldset id="face-config-test">
+
+          <legend><strong><input type="checkbox" id="face-config-test-toggle" onclick="toggleConfig('face-config-test');" checked> Config : Node : Color</strong></legend>
+
+          <div id="color-config-minimap" class="minimap"></div>
+
+          <hr />
+
+          <p>
+            <strong><label for="color-config-minimap-type">Type</label></strong><br />
+            <select id="color-config-minimap-type" onchange="globalThis.minitype = document.getElementById('color-config-minimap-type').value;">
+              <option value="node" selected>Node</option>
+              <option value="edge">Edge</option>
+              <option value="node-label">Label (Node)</option>
+              <option value="edge-label">Label (Edge)</option>
+              <option value="face" disabled>Face</option>
+            </select>
+          </p>
+
+          <hr />
+
+          <p class="flex center">
+
+            <button id="color-config-minimap-apply" onclick="applyColorElement();">Apply Template</button>  <input id="color-config-minimap-apply-toggle" type="checkbox" onclick="applyColorElement(); document.getElementById('color-config-minimap-apply').disabled = !(document.getElementById('color-config-minimap-apply').disabled);">
+
+          </p>
+
+        </fieldset>
+
+        <fieldset id="color-config-template-fieldset" class="graph flex center">
+
+          <legend><strong>Color Config Template Element</strong></legend>
+
+          <div id="color-config-template" class="cytoscope"></div>
+
+        </fieldset>
+
+        <fieldset id="config-fieldset">
+
+          <legend>
+            <strong><input type="checkbox" id="config-toggle" onclick="toggleConfig('config');" checked> Config : Template</strong> <button id="config-fieldset-advanced" onclick="">⚙️</button>
+          </legend>
+
+          <div id="color-config-minimap-edge" class="minimap"></div>
+
+          <hr />
+
+          <div id="config-element-type">
+          <p>
+            <label for="config-element-type-select"><strong>Type</strong></label><br />
+            <select id="config-element-type-select" onchange="">
+              <option value="" disabled selected hidden></option>
+              <option value="node">Node</option>
+              <option value="edge">Edge</option>
+              <option value="face" disabled>Face</option>
+            </select>
+            <button id="config-element-type-advanced" onclick="">⚙️</button>
+          </p>
+          </div>
+
+          <div id="config-element-property">
+          <p>
+            <label for="config-element-property-select"><strong>Property</strong></label><br />
+            <select id="config-element-property-select" onchange="">
+              <option value="" disabled selected hidden></option>
+              <option value="color">Color</option>
+              <option value="shape" disabled>Shape</option>
+              <option value="space" disabled>Space</option>
+              <option value="label" disabled>Label</option>
+            </select>
+            <button id="config-element-property-advanced" onclick="">⚙️</button>
+          </p>
+          </div>
+
+          <div id="config-element-color">
+            <p>
+              <label for="config-element-color-output"><strong>Color:</strong></label> <output type="text" id="config-element-color-output" value="#000000">#000000</output><br />
+              <input type="color" id="config-element-color-input" value="#000000">
+              <button id="config-element-color-advanced-toggle" onclick="colorAdvancedToggle();">⚙️</button>
+            </p>
+
+            <script>
+              function colorAdvancedToggle()
+              {
+                let colorAdvancedDiv = document.getElementById("config-element-color-advanced");
+
+                console.log('x', colorAdvancedDiv);
+
+                if (colorAdvancedDiv.style.display == "none")
+                {
+                  console.log("none");
+                  colorAdvancedDiv.style.display = "block";
+                  console.log('y', colorAdvancedDiv);
+                }
+                else
+                {
+                  console.log("block");
+                  colorAdvancedDiv.style.display = "none";
+                  console.log('y', colorAdvancedDiv);
+                }
+              }
+            </script>
+
+            <div id="config-element-color-advanced" style="display:none;">
+
+              <p>
+                <strong><label for="color-config-type-select">Color : Type</label></strong><br />
+                <select id="color-config-type-select" onchange="colorConfigTypeDisplay();">
+                  <option value="" disabled selected hidden></option>
+                  <option value="name">name</option>
+                  <option value="hex">hex</option>
+                  <option value="rgb">rgb</option>
+                </select>
+              </p>
+
+              <div id="color-type-name-div" style="display:none;">
+
+                <p>
+                  <strong><label for="color-type-name-select">Color : Name</label></strong><br />
+                  <select id="color-type-name-select" onchange="colorConfigNameDisplay();">
+                    <option value="" disabled selected hidden></option>
+                    <option value="text">text</option>
+                    <option value="list">list</option>
+                    <option value="data">data</option>
+                    <option value="random">random</option>
+                  </select>
+                </p>
+
+                <div id="color-type-name-text-div" style="display:none;">
+                <p>
+                  <strong><label for="color-type-name-text">Color : Name : Text</label></strong><br />
+                  <input id="color-type-name-text" list="color-type-name-text-datalist">
+                  <datalist id="color-type-name-text-datalist">
+                    <option value="red">
+                    <option value="orange">
+                    <option value="yellow">
+                    <option value="green">
+                    <option value="blue">
+                    <option value="indigo">
+                    <option value="violet">
+                  </datalist>
+                </p>
+                </div>
+
+                <div id="color-type-name-list-div" style="display:none;">
+                <p>
+                  <strong><label for="color-type-name-list">Color : Name : List</label></strong><br />
+                  <select id="color-type-name-list">
+                    <option value="" disabled selected hidden></option>
+                    <option value="red">red</option>
+                    <option value="orange">orange</option>
+                    <option value="yellow">yellow</option>
+                    <option value="green">green</option>
+                    <option value="blue">blue</option>
+                    <option value="indigo">indigo</option>
+                    <option value="violet">violet</option>
+                  </select>
+                </p>
+                </div>
+
+                <div id="color-type-name-data-div" style="display:none;">
+                <p>
+                  <strong><label for="color-type-name-data">Color : Name : Data</label></strong><br />
+                  <input id="color-type-name-data" disabled>
+                </p>
+                </div>
+
+                <div id="color-type-name-random-div" style="display:none;">
+                <p>
+                  <strong><label for="color-type-name-random">Color : Name : Random</label></strong><br />
+                  <input id="color-type-name-random" disabled>
+                </p>
+                </div>
+
+              </div>
+
+              <div id="color-type-hex-div" style="display:none;">
+
+                <p>
+                  <strong><label for="color-type-hex-select">Color : Hex</label></strong><br />
+                  <select id="color-type-hex-select" onchange="colorConfigHexDisplay();">
+                    <option value="" disabled selected hidden></option>
+                    <option value="text">text</option>
+                    <option value="range">range</option>
+                    <option value="data">data</option>
+                    <option value="random">random</option>
+                  </select>
+                </p>
+
+                <div id="color-type-hex-text-div" style="display:none;">
+                <p>
+                  <strong><label for="color-type-hex-text">Color : Hex : Text</label></strong><br />
+                  <input type="text" id="color-type-hex-text" disabled>
+                </p>
+                </div>
+
+                <div id="color-type-hex-range-div" style="display:none;">
+                <p>
+                  <strong><label for="color-type-hex-range">Color : Hex : Range</label></strong><br />
+                  <input type="range" id="color-type-hex-range" disabled>
+                </p>
+                </div>
+
+                <div id="color-type-hex-data-div" style="display:none;">
+                <p>
+                  <strong><label for="color-type-hex-data">Color : Hex : Data</label></strong><br />
+                  <input id="color-type-hex-data" disabled>
+                </p>
+                </div>
+
+                <div id="color-type-hex-random-div" style="display:none;">
+                <p>
+                  <strong><label for="color-type-hex-random">Color : Hex : Random</label></strong><br />
+                  <input id="color-type-hex-random" disabled>
+                </p>
+                </div>
+
+              </div>
+
+              <div id="color-type-rgb-div" style="display:none;">
+                <p>
+                  <strong>Color : RGB : Number</strong><br />
+                  <label for="color-config-option-number-r">R</label> <input type="number" id="color-config-option-number-r" name="color-config-option-number-r" value="0" min="0" max="255" step="1"><br />
+                  <label for="color-config-option-number-g">G</label> <input type="number" id="color-config-option-number-g" name="color-config-option-number-g" value="0" min="0" max="255" step="1"><br />
+                  <label for="color-config-option-number-b">B</label> <input type="number" id="color-config-option-number-b" name="color-config-option-number-b" value="0" min="0" max="255" step="1"><br />
+                </p>
+                <p>
+                  <strong>Color : RGB : Range</strong><br />
+                  <label for="color-config-option-range-r">R</label> <input type="range" id="color-config-option-range-r" name="color-config-option-range-r" value="0" min="0" max="255" step="1"><br />
+                  <label for="color-config-option-range-g">G</label> <input type="range" id="color-config-option-range-g" name="color-config-option-range-g" value="0" min="0" max="255" step="1"><br />
+                  <label for="color-config-option-range-b">B</label> <input type="range" id="color-config-option-range-b" name="color-config-option-range-b" value="0" min="0" max="255" step="1"><br />
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div id="config-element-shape" style="display:none;">
+          <p>
+            <label for="config-element-shape-output"><strong>Shape:</strong></label> <output type="number" id="config-element-shape-output" value="0">0</output>
+          </p>
+          </div>
+
+          <div id="config-element-space" style="display:none;">
+          <p>
+            <label for="config-element-space-output"><strong>Space:</strong></label> <output type="number" id="config-element-space-output" value="0">0</output>
+          </p>
+          </div>
+
+          <div id="config-element-label" style="display:none;">
+          <p>
+            <label for="config-element-label-output"><strong>Label:</strong></label> <output type="number" id="config-element-label-output" value="0">0</output>
+          </p>
+          </div>
+
+        <hr />
+
+        <p class="flex center">
+
+          <button id="color-config-minimap-edge-apply" onclick="applyTemplateEdge();">Apply Template</button>
+
+        </p>
+
+        </fieldset>
+
+      </div>
+
+      <hr />
+
+      <div id="display-config-lower" class="flex">
+
+        <fieldset id="face-config-test-form">
+
+          <legend><strong>Config : Color</strong></legend>
+
+          <p>
+            <strong><label for="face-config-test-option-color">Color</label></strong><br />
+            <input type="color" id="face-config-test-option-color" name="face-config-test-option-color" value="#000000">
+          </p>
+
+          <p>
+            <strong><label for="face-config-test-option-select">Color : Select</label></strong><br />
+            <select id="face-config-test-option-select">
+              <!--<option value="" disabled selected hidden></option>
+              <option value="red">red</option>
+              <option value="orange">orange</option>
+              <option value="yellow">yellow</option>
+              <option value="green">green</option>
+              <option value="blue">blue</option>
+              <option value="indigo">indigo</option>
+              <option value="violet">violet</option>-->
+            </select>
+          </p>
+
+          <p>
+            <strong><label for="face-config-test-option-list">Color : Datalist</label></strong><br />
+            <input id="face-config-test-option-list" list="face-config-test-option-datalist">
+            <datalist id="face-config-test-option-datalist">
+              <!--<option value="red">
+              <option value="orange">
+              <option value="yellow">
+              <option value="green">
+              <option value="blue">
+              <option value="indigo">
+              <option value="violet">-->
+            </datalist>
+          </p>
+
+          <script>
+
+            function populateColorLists()
+            {
+              fetch( "./data/colorNameToHex.json" )
+              .then(response => response.json())
+              .then((data) => {
+
+                let selectElement = document.getElementById("face-config-test-option-select");
+                let datalistElement = document.getElementById("face-config-test-option-datalist");
+
+                console.log("DATA");
+                console.log(data);
+
+                let colorKeys = Object.keys(data);
+
+                for (let i = 0; i < colorKeys.length; i++)
+                {
+                  let optionElement = document.createElement( "option" );
+                  optionElement["value"] = colorKeys[i];
+
+                  datalistElement.appendChild(optionElement);
+
+                  optionElement.appendChild(document.createTextNode(colorKeys[i]));
+
+                  selectElement.appendChild(optionElement);
+                }
+              });
+            }
+            populateColorLists();
+
+          </script>
+
+          <p>
+            <strong><label for="face-config-test-option-text">Color : Text</label></strong><br />
+            <input type="text" id="face-config-test-option-text" name="face-config-test-option-text" value="#000000">
+          </p>
+
+          <p>
+            <strong>Color : RGB : Number</strong><br />
+            <label for="face-config-test-option-number-r">R</label> <input type="number" id="face-config-test-option-number-r" name="face-config-test-option-number-r" value="0" min="0" max="255" step="1"><br />
+            <label for="face-config-test-option-number-g">G</label> <input type="number" id="face-config-test-option-number-g" name="face-config-test-option-number-g" value="0" min="0" max="255" step="1"><br />
+            <label for="face-config-test-option-number-b">B</label> <input type="number" id="face-config-test-option-number-b" name="face-config-test-option-number-b" value="0" min="0" max="255" step="1"><br />
+          </p>
+
+          <p>
+            <strong>Color : RGB : Range</strong><br />
+            <label for="face-config-test-option-range-r">R</label> <input type="range" id="face-config-test-option-range-r" name="face-config-test-option-range-r" value="0" min="0" max="255" step="1"><br />
+            <label for="face-config-test-option-range-g">G</label> <input type="range" id="face-config-test-option-range-g" name="face-config-test-option-range-g" value="0" min="0" max="255" step="1"><br />
+            <label for="face-config-test-option-range-b">B</label> <input type="range" id="face-config-test-option-range-b" name="face-config-test-option-range-b" value="0" min="0" max="255" step="1"><br />
+          </p>
+
+        </fieldset>
+
+        <fieldset id="location-config-fieldset">
+
+          <legend><strong>Config : Location</strong></legend>
+
+          <p>
+            <strong>Location : X</strong><br />
+            <input type="radio" id="location-x-radio-layout" name="location-x-radio" value="layout" checked> <label for="location-x-radio-layout">Layout</label><br />
+            <input type="radio" id="location-x-radio-random" name="location-x-radio" value="random"> <label for="location-x-radio-random">Random</label><br />
+            <input type="radio" id="location-x-radio-datakey" name="location-x-radio" value="datakey"> <label for="location-x-radio-datakey">Datakey</label> <input type="text" id="radio-x-radio-datakey-text" value=""><br />
+          </p>
+
+          <p>
+            <strong>Location : Y</strong><br />
+            <input type="radio" id="location-y-radio-layout" name="location-y-radio" value="layout" checked> <label for="location-y-radio-layout">Layout</label><br />
+            <input type="radio" id="location-y-radio-random" name="location-y-radio" value="random"> <label for="location-y-radio-random">Random</label><br />
+            <input type="radio" id="location-y-radio-datakey" name="location-y-radio" value="datakey"> <label for="location-y-radio-datakey">Datakey</label> <input type="text" id="radio-y-radio-datakey-text" value=""><br />
+          </p>
+
+          <p>
+            <strong>Location : Z</strong><br />
+            <input disabled type="radio" id="location-z-radio-layout" name="location-z-radio" value="layout" checked> <label for="location-z-radio-layout">Layout</label><br />
+            <input disabled type="radio" id="location-z-radio-random" name="location-z-radio" value="random"> <label for="location-z-radio-random">Random</label><br />
+            <input disabled type="radio" id="location-z-radio-datakey" name="location-z-radio" value="datakey"> <label for="location-z-radio-datakey">Datakey</label> <input disabled type="text" id="radio-z-radio-datakey-text" value=""><br />
+          </p>
+
+        </fieldset>
+
+        <fieldset id="radius-config-fieldset">
+
+          <legend><strong>Config : Radius</strong></legend>
+
+        </fieldset>
+
+      </div>
+
+      <hr />
+
+      <fieldset>
+
+        <legend><strong>Load</strong></legend>
+
+        <p>
+          <label for="load-dire"><strong>Load From Directory Path</strong></label><br />
+          <button id="load-dire" onclick="globalThis.loadNetworkFromDirectory( document.getElementById('dire-path').value );">Upload</button> <input id="dire-path" type="text" value="/data/test-elements.json"><br />
+        </p>
+
+        <p>
+          <label for="load-data"><strong>Load From File System</strong></label><br />
+          <button id="load-data" onclick="globalThis.loadNetworkFromFile( 'data-file' );">Upload</button>
+          <input type="file" id="data-file">
+        </p>
+
+        <p>
+          <label for="load-test"><strong>Load Test Data File</strong></label><br />
+          <button id="load-test" onclick="loadNetworkFromPath('/data/test-nodes.json');">Upload</button>
+        </p>
+
+      </fieldset>
+
+    </div>
+
+    <script>
+
+      globalThis.minicol = {
+        "node": "#0000ff",
+        "edge": "#ff0000",
+        "node-label": "#ff0000",
+        "edge-label": "#000000"
+      };
+
+      let colorHexDict = {};
+      let colorNameDict = {};
+
+      fetch('./data/colorHexToName.json')
+      .then(response => response.json())
+      .then((data) => {
+        colorHexDict = data;
+      });
+
+      fetch('./data/colorNameToHex.json')
+      .then(response => response.json())
+      .then((data) => {
+        colorNameDict = data;
+      });
+
+      function toggleConfig(displayId)
+      {
+
+        let configToggle = document.getElementById(displayId + "-toggle");
+
+        console.log(configToggle, displayId);
+        /*
+        let configSelect = document.getElementById(displayId + "-select");
+        let configOptionSelect = document.getElementById(displayId + "-option-select");
+        let configOptionList = document.getElementById(displayId + "-option-list");
+        let configOptionDatalist = document.getElementById(displayId + "-option-datalist");
+        let configOptionColor = document.getElementById(displayId + "-option-color");
+        let configOptionText = document.getElementById(displayId + "-option-text");
+        let configOptionNumber = document.getElementById(displayId + "-option-number");
+        let configOptionRange = document.getElementById(displayId + "-option-range");
+        */
+
+        const disabledBoolean = !configToggle.checked;
+
+        /*
+        configSelect.disabled = disabledBoolean;
+        configOptionSelect.disabled = disabledBoolean;
+        configOptionList.disabled = disabledBoolean;
+        configOptionDatalist.disabled = disabledBoolean;
+        configOptionColor.disabled = disabledBoolean;
+        configOptionText.disabled = disabledBoolean;
+        configOptionNumber.disabled = disabledBoolean;
+        configOptionRange.disabled = disabledBoolean;
+        */
+
+        let configElement = document.getElementById(displayId);
+        configElement.disabled = disabledBoolean;
+
+        console.log(displayId, "!", disabledBoolean);
+      }
+
+      function colorNameToHex(colorName)
+      {
+        var ctx = document.createElement("canvas").getContext("2d");
+        ctx.fillStyle = colorName;
+        return ctx.fillStyle;
+      }
+
+      function rgbFormToHex(elementId)
+      {
+        let colorR = parseInt(document.getElementById(elementId + "-r").value, 10);
+        let colorG = parseInt(document.getElementById(elementId + "-g").value, 10);
+        let colorB = parseInt(document.getElementById(elementId + "-b").value, 10);
+        let colorHex = "#" + colorR.toString(16).padStart(2, "0") + colorG.toString(16).padStart(2, "0") + colorB.toString(16).padStart(2, "0");
+        return colorHex;
+      }
+
+      function checkColorHexDict(colorHex)
+      {
+        let colorKey = colorHex.toUpperCase();
+        if (colorKey in colorHexDict)
+        {
+          document.getElementById("face-config-test-option-select").value = colorHexDict[colorKey].toLowerCase();
+          document.getElementById("face-config-test-option-list").value = colorHexDict[colorKey];
+        }
+        else
+        {
+          document.getElementById("face-config-test-option-select").value = "";
+          document.getElementById("face-config-test-option-list").value = "";
+        }
+      }
+
+      function checkColorHexDictEdge(colorHex)
+      {
+        let colorKey = colorHex.toUpperCase();
+        if (colorKey in colorHexDict)
+        {
+          document.getElementById("color-config-option-select").value = colorHexDict[colorKey].toLowerCase();
+          document.getElementById("color-config-option-list").value = colorHexDict[colorKey];
+        }
+        else
+        {
+          document.getElementById("color-config-option-select").value = "";
+          document.getElementById("color-config-option-list").value = "";
+        }
+      }
+
+      function balanceConfig(colorChange)
+      {
+        console.log("balanceConfig", "colorChange", colorChange);
+
+        let inputId = colorChange.target.id;
+
+        let newColorHex = null;
+
+        switch( inputId )
+        {
+          case "face-config-test-option-select":
+            document.getElementById("face-config-test-option-list").value = colorChange.target.value;
+            newColorHex = colorNameToHex(colorChange.target.value);
+            break;
+          case "face-config-test-option-list":
+            document.getElementById("face-config-test-option-select").value = colorChange.target.value;
+            newColorHex = colorNameToHex(colorChange.target.value);
+            break;
+          case "face-config-test-option-color":
+          case "face-config-test-option-text":
+            newColorHex = colorChange.target.value;
+            checkColorHexDict(newColorHex);
+            break;
+          case "face-config-test-option-number-r":
+          case "face-config-test-option-number-g":
+          case "face-config-test-option-number-b":
+            newColorHex = rgbFormToHex("face-config-test-option-number");
+            checkColorHexDict(newColorHex);
+            break;
+          case "face-config-test-option-range-r":
+          case "face-config-test-option-range-g":
+          case "face-config-test-option-range-b":
+            newColorHex = rgbFormToHex("face-config-test-option-range");
+            checkColorHexDict(newColorHex);
+            break;
+        };
+
+        document.getElementById("face-config-test-option-color").value = newColorHex;
+        document.getElementById("face-config-test-option-text").value = newColorHex;
+
+        let newColorR = parseInt(newColorHex.slice(1,3), 16);
+        let newColorG = parseInt(newColorHex.slice(3,5), 16);
+        let newColorB = parseInt(newColorHex.slice(5,7), 16);
+
+        document.getElementById("face-config-test-option-number-r").value = newColorR;
+        document.getElementById("face-config-test-option-number-g").value = newColorG;
+        document.getElementById("face-config-test-option-number-b").value = newColorB;
+
+        document.getElementById("face-config-test-option-range-r").value = newColorR;
+        document.getElementById("face-config-test-option-range-g").value = newColorG;
+        document.getElementById("face-config-test-option-range-b").value = newColorB;
+
+        console.log(newColorHex);
+
+        globalThis.minicol[globalThis.minitype] = newColorHex;
+
+        updateTemplate();
+
+        const toggleFlag = document.getElementById("color-config-minimap-apply-toggle").checked;
+        if (toggleFlag) applyColorElement();
+      }
+      globalThis.balanceConfig = balanceConfig;
+
+      function balanceConfigEdge(colorChange)
+      {
+        console.log(colorChange);
+
+        let inputId = colorChange.target.id;
+
+        let newColorHex = null;
+
+        switch( inputId )
+        {
+          case "color-config-option-select":
+            document.getElementById("color-config-option-list").value = colorChange.target.value;
+            newColorHex = colorNameToHex(colorChange.target.value);
+            break;
+          case "color-config-option-list":
+            document.getElementById("color-config-option-select").value = colorChange.target.value;
+            newColorHex = colorNameToHex(colorChange.target.value);
+            break;
+          case "color-config-option-color":
+          case "color-config-option-text":
+            newColorHex = colorChange.target.value;
+            checkColorHexDictEdge(newColorHex);
+            break;
+          case "color-config-option-number-r":
+          case "color-config-option-number-g":
+          case "color-config-option-number-b":
+            newColorHex = rgbFormToHex("color-config-option-number");
+            checkColorHexDictEdge(newColorHex);
+            break;
+          case "color-config-option-range-r":
+          case "color-config-option-range-g":
+          case "color-config-option-range-b":
+            newColorHex = rgbFormToHex("color-config-option-range");
+            checkColorHexDictEdge(newColorHex);
+            break;
+        };
+
+        document.getElementById("color-config-option-color").value = newColorHex;
+        document.getElementById("color-config-option-text").value = newColorHex;
+
+        let newColorR = parseInt(newColorHex.slice(1,3), 16);
+        let newColorG = parseInt(newColorHex.slice(3,5), 16);
+        let newColorB = parseInt(newColorHex.slice(5,7), 16);
+
+        document.getElementById("color-config-option-number-r").value = newColorR;
+        document.getElementById("color-config-option-number-g").value = newColorG;
+        document.getElementById("color-config-option-number-b").value = newColorB;
+
+        document.getElementById("color-config-option-range-r").value = newColorR;
+        document.getElementById("color-config-option-range-g").value = newColorG;
+        document.getElementById("color-config-option-range-b").value = newColorB;
+
+        console.log(newColorHex);
+
+        globalThis.minicoledge = newColorHex;
+
+        updateTemplateEdge();
+      }
+      globalThis.balanceConfigEdge = balanceConfigEdge;
+
+      function balanceColor()
+      {
+        
+      }
+      globalThis.balanceColor = balanceColor;
+
+      function locationConfig()
+      {
+        let xElement = document.getElementsByName("location-x-radio");
+        let xValue;
+        for (x of xElement) if (x.checked) xValue = x.value;
+
+        let yElement = document.getElementsByName("location-y-radio");
+        let yValue;
+        for (y of yElement) if (y.checked) yValue = y.value;
+
+        if ( xValue == "random" || yValue == "random")
+        {
+          globalThis.graphs["color-config-template"]["graph"].nodes().positions
+          (
+            function( node, i )
+            {
+              const newX = 25 + Math.floor(Math.random() * 850);
+              const newY = 25 + Math.floor(Math.random() * 850);
+              return {
+                x: newX,
+                y: newY
+              };
+            }
+          );
+        }
+      }
+      globalThis.locationConfig = locationConfig;
+
+      function listenerSetup()
+      {
+        const inputs = document.getElementById("face-config-test-form").elements;
+
+        for (let i = 0; i < inputs.length; i++)
+        {
+          console.log(inputs[i]);
+
+          inputs[i].addEventListener('change', balanceConfig);
+        }
+
+        const locationInputs = document.getElementById("location-config-fieldset").elements;
+
+        for (let i = 0; i < locationInputs.length; i++)
+        {
+          console.log(locationInputs[i]);
+
+          locationInputs[i].addEventListener('change', locationConfig);
+        }
+      }
+
+      function updateTemplate()
+      {
+        let elementType = globalThis.minitype;
+        let newStyleColor = globalThis.minicol[elementType];
+
+        if (elementType == "node")
+        {
+          globalThis.graphs["color-config-minimap"]["graph"].style().selector("node").style("background-color", newStyleColor).update();
+        }
+        else if (elementType == "edge")
+        {
+          globalThis.graphs["color-config-minimap"]["graph"].style().selector("edge").style("line-color", newStyleColor).update();
+        }
+        else if (elementType == "node-label")
+        {
+          globalThis.graphs["color-config-minimap"]["graph"].style().selector("node").style("color", newStyleColor).update();
+        }
+        else if (elementType == "edge-label")
+        {
+          globalThis.graphs["color-config-minimap"]["graph"].style().selector("edge").style("color", newStyleColor).update();
+        }
+      }
+
+      function updateTemplateEdge()
+      {
+        let newStyleColor = globalThis.minicoledge;
+
+        globalThis.graphs["color-config-minimap-edge"]["graph"].style().selector("edge").style("line-color", newStyleColor).update();
+      }
+
+      function applyElementTemplate( elementType, elementStyleName, elementStyleValue )
+      {
+        globalThis.graphs["color-config-template"]["graph"].style().selector( elementType ).style( elementStyleName, elementStyleValue ).update();
+      }
+
+      function applyColorElement()
+      {
+        applyElementTemplate( "node", "background-color", globalThis.minicol["node"] );
+        applyElementTemplate( "edge", "line-color", globalThis.minicol["edge"] );
+        applyElementTemplate( "node", "color", globalThis.minicol["node-label"] );
+        applyElementTemplate( "edge", "color", globalThis.minicol["edge-label"] );
+      }
+
+      function applyTemplate()
+      {
+        let templateStyleColor = globalThis.minicol["node"];
+
+        globalThis.graphs["color-config-template"]["graph"].style().selector("node").style("background-color", templateStyleColor).update();
+      }
+
+      function applyTemplateEdge()
+      {
+        let templateStyleColor = globalThis.minicoledge;
+
+        globalThis.graphs["color-config-template"]["graph"].style().selector("edge").style("line-color", templateStyleColor).update();
+      }
+
+      function colorConfigTypeDisplay()
+      {
+        let typeSelectValue = document.getElementById("color-config-type-select").value;
+
+        ["name","hex","rgb"].forEach(function(elementType)
+        {
+          let typeDiv = document.getElementById("color-type-" + elementType + "-div");
+          if (elementType == typeSelectValue)
+          {
+            typeDiv.style.display = "block";
+          }
+          else
+          {
+            typeDiv.style.display = "none";
+          }
+        });
+      }
+
+      function colorConfigNameDisplay()
+      {
+        let typeSelectValue = document.getElementById("color-type-name-select").value;
+
+        ["text","list","data","random"].forEach(function(elementType)
+        {
+          let typeDiv = document.getElementById("color-type-" + "name" + "-" + elementType + "-div");
+          if (elementType == typeSelectValue)
+          {
+            typeDiv.style.display = "block";
+          }
+          else
+          {
+            typeDiv.style.display = "none";
+          }
+        });
+      }
+
+      function colorConfigHexDisplay()
+      {
+        let typeSelectValue = document.getElementById("color-type-hex-select").value;
+
+        ["text","range","data","random"].forEach(function(elementType)
+        {
+          let typeDiv = document.getElementById("color-type-" + "hex" + "-" + elementType + "-div");
+          if (elementType == typeSelectValue)
+          {
+            typeDiv.style.display = "block";
+          }
+          else
+          {
+            typeDiv.style.display = "none";
+          }
+        });
+      }
+
+      listenerSetup();
+
+    </script>
+
+  </body>
+
+</html>
+
