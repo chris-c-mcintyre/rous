@@ -4,6 +4,8 @@ import { generateDocumentTitle, generateDocumentFavicon, generateDisplayObject, 
 
 import { setupFileUpload } from "./src/rous/api/files.js";
 
+import { displayNode, displayEdge } from "./src/rous/api/display.js";
+
 /* functions */
 
 function customListener( dataJson, displayObject )
