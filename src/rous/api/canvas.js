@@ -68,3 +68,6 @@ function drawVectorFromPosition( jsArgs, jsKwargs )
 
   displayCanvasContext.stroke( );
 }
+
+export { drawNode, drawEdge, drawVectorFromPosition };
+
