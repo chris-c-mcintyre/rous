@@ -1,14 +1,15 @@
 
 // self-styling
 
-import { generateDocumentFavicon } from "../../src/rous/api/display.js";
-
-generateDocumentFavicon
+document.head.appendChild
 (
-  [],
-  {
-    icon: Math.random() >= 0.96 ? "🐀" : "🌹"
-  }
+  Object.assign
+  (
+    document.createElement("link"),
+    {
+      rel: "icon",
+      href: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>${ Math.random() >= 0.96 ? "🐀" : "🎨" }</text></svg>`}
+  )
 );
 
 // environment
