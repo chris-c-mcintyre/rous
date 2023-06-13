@@ -443,3 +443,5 @@ function setupConfig()
 
 setupConfig();
 
+loadNetworkFromPath("/data/test-nodes.json");
+
