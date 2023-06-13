@@ -74,6 +74,9 @@ function generateDisplayObject( jsArgs, jsKwargs )
 
 function renderDisplayObject( jsArgs, jsKwargs )
 {
+  // jsArgs
+  let displayObject = jsArgs[0];
+
   // jsKwargs
   let layerWidth = jsKwargs["width"] ?? 625;
   let layerHeight = jsKwargs["height"] ?? 625;
@@ -81,9 +84,9 @@ function renderDisplayObject( jsArgs, jsKwargs )
   const displayDiv = document.createElement("div");
   displayDiv.style = `width: ${layerWidth}px; height: ${layerHeight}px; position: relative;`;
 
-  for (let i = 0; i < jsArgs[0]["layers"].length; i++)
+  for (let i = 0; i < displayObject["layers"].length; i++)
   {
-    displayDiv.appendChild(jsArgs[0]["layers"][i]);
+    displayDiv.appendChild(displayObject["layers"][i]);
   }
 
   document.body.appendChild(displayDiv);
