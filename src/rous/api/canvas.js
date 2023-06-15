@@ -43,9 +43,9 @@ function drawNode( jsArgs, jsKwargs )
 
   displayCanvasContext.beginPath( );
 
-  displayCanvasContext.strokeStyle = displayEdgeInstance.style.border.color;
-  displayCanvasContext.lineWidth = displayEdgeInstance.style.border.width;
-  displayCanvasContext.fillStyle = displayEdgeInstance.style.color;
+  displayCanvasContext.strokeStyle = displayNodeInstance.style.border.color;
+  displayCanvasContext.lineWidth = displayNodeInstance.style.border.width;
+  displayCanvasContext.fillStyle = displayNodeInstance.style.color;
 
   displayCanvasContext.arc
   (
