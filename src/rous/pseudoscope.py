@@ -13,29 +13,29 @@ def demo_function(arg_1, arg_2):
 
 my_scope = "exclaim"
 
-def scoped_return( fn_output ):
+def exclaim_fn_return( fn_output ):
   print( str(fn_output) + "!!!" )
 
-def scoped_call( fn_input ):
+def exclaim_fn_call( fn_input ):
   print( str(fn_input) + "???" )
 
-def scoped_list_fn( input_str ):
+def exclaim_list_fn( input_str ):
   print( input_str.upper() + "!!!" )
 
 pseudoscope(
   my_scope,
   {
     "function": {
-      "return": my_return
+      "return": exclaim_fn_return
     },
     "module": {
       "function": {
-        "call": my_call,
-        "return": my_return
+        "call": exclaim_fn_call,
+        "return": exclaim_fn_return
       }
     },
     "string": {
-      "function": scoped_list_fn
+      "function": exclaim_list_fn
     }
   }
 )
