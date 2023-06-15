@@ -103,5 +103,53 @@ function drawVectorFromPosition( jsArgs, jsKwargs )
   displayCanvasContext.stroke( );
 }
 
+/* compositional functions */
+
+function canvasDrawLine( jsArgs, jsKwargs )
+{
+  // TODO
+  return 1;
+}
+
+function canvasDrawCirc( jsArgs, jsKwargs )
+{
+  // TODO
+  return 1;
+}
+
+function canvasDrawRect( jsArgs, jsKwargs )
+{
+  // TODO
+  return 1;
+}
+
+/* compositional features */
+
+// TODO
+
+let useGrid;
+
+let useCross;
+
+let useCursor;
+
+let connectOnClick;
+
+let drawOnClick;
+
+let drawOnDrag;
+
+let lockToGrid;
+
+let lockToGridVertex;
+
+let lockToGridSegment;
+
+let lockToGridCell;
+
+let highlightGrid;
+
+/* module exports */
+
 export { drawNode, drawEdge, drawVectorFromPosition };
 
