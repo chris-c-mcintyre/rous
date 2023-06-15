@@ -151,5 +151,5 @@ let highlightGrid;
 
 /* module exports */
 
-export { drawNode, drawEdge, drawVectorFromPosition };
+export { addCanvasNodeProperties, createCanvasNode, drawNode, drawEdge, drawVectorFromPosition };
 
