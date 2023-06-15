@@ -40,6 +40,10 @@ pseudoscope(
   }
 )
 
+demo_function(5, 3)
+
+> 125
+
 exclaim.demo_function(5, 3)
 
 > 125!!!
