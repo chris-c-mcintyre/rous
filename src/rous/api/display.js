@@ -31,6 +31,48 @@ function generateDocumentFavicon( jsArgs, jsKwargs )
   );
 }
 
+/* display graph elements */
+
+function addDisplayNodeProperties( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let nodeId = jsArgs[0];
+  let nodePosition = jsArgs[1];
+  let nodeJson = jsArgs[2];
+
+  // jsKwargs
+  let nodeName = jsKwargs["name"];
+  let nodeContent = jsKwargs["content"];
+
+  let nodeJson = {};
+  nodeJson["group"] = "nodes";
+  nodeJson["data"] = {
+    "id": nodeId
+  };
+  nodeJson["position"] = nodePosition;
+
+  if (nodeName) nodeJson["data"]["name"] = nodeName;
+  if (nodeContent) nodeJson["content"] = nodeContent;
+
+  return nodeJson;
+};
+
+function createDisplayNode( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let nodeId = jsArgs[0];
+  let nodePosition = jsArgs[1];
+
+  // jsKwargs
+  let nodeName = jsKwargs["name"];
+  let nodeContent = jsKwargs["content"];
+
+  let newNode = {};
+  newNode = addDisplayNodeProperties( [ nodeId, nodePosition, newNode ], { "name": nodeName, "content": nodeContent } );
+
+  return newNode;
+}
+
 /* display functions */
 
 function generateDisplayLayer( jsArgs, jsKwargs )
