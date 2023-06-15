@@ -57,6 +57,31 @@ function addDisplayNodeProperties( jsArgs, jsKwargs )
   return nodeJson;
 };
 
+function addDisplayEdgeProperties( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let edgeId = jsArgs[0];
+  let edgeSourceId = jsArgs[1];
+  let edgeTargetId = jsArgs[2];
+  let edgeJson = jsArgs[3];
+
+  // jsKwargs
+  let edgeName = jsKwargs["name"];
+  let edgeContent = jsKwargs["content"];
+
+  edgeJson["group"] = "edges";
+  edgeJson["data"] = {
+    "id": edgeId,
+    "source": edgeSourceId,
+    "target": edgeTargetId
+  };
+
+  if (edgeName) edgeJson["data"]["name"] = edgeName;
+  if (edgeContent) edgeJson["content"] = edgeContent;
+
+  return edgeJson;
+}
+
 function createDisplayNode( jsArgs, jsKwargs )
 {
   // jsArgs
@@ -71,6 +96,23 @@ function createDisplayNode( jsArgs, jsKwargs )
   newNode = addDisplayNodeProperties( [ nodeId, nodePosition, newNode ], { "name": nodeName, "content": nodeContent } );
 
   return newNode;
+}
+
+function createDisplayEdge( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let edgeId = jsArgs[0];
+  let edgeSourceId = jsArgs[1];
+  let edgeTargetId = jsArgs[2];
+
+  // jsKwargs
+  let edgeName = jsKwargs["name"];
+  let edgeContent = jsKwargs["content"];
+
+  let newEdge = {};
+  newEdge = addDisplayEdgeProperties( [ edgeId, edgeSourceId, edgeTargetId, newEdge ], { "name": edgeName, "content": edgeContent } );
+
+  return newEdge;
 }
 
 /* display functions */
