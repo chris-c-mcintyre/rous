@@ -1,3 +1,37 @@
+import { createDisplayNode } from "./display.js";
+
+/* canvas elements */
+
+function addCanvasNodeProperties( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let nodeJson = jsArgs[0];
+
+  // jsKwargs
+  let nodeStyle = jsKwargs["style"] ?? {};
+
+  nodeJson["style"] = nodeStyle;
+
+  return nodeJson;
+}
+
+function createCanvasNode( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let nodeId = jsArgs[0];
+  let nodePosition = jsArgs[1];
+
+  // jsKwargs
+  let nodeName = jsKwargs["name"];
+  let nodeContent = jsKwargs["content"] ?? {};
+  let nodeStyle = jsKwargs["style"] ?? {};
+
+  let canvasNode = createDisplayNode( [ nodeId, nodePosition ], { "name": nodeName, "content": nodeContent } );
+
+  canvasNode = addCanvasNodeProperties( [ canvasNode ], { "style": nodeStyle } );
+
+  return canvasNode;
+}
 
 /* draw functions */
 
