@@ -45,7 +45,6 @@ function addDisplayNodeProperties( jsArgs, jsKwargs )
   let nodeContent = jsKwargs["content"];
 
   let nodeJson = {};
-  nodeJson["group"] = "nodes";
   nodeJson["data"] = {
     "id": nodeId
   };
@@ -69,7 +68,6 @@ function addDisplayEdgeProperties( jsArgs, jsKwargs )
   let edgeName = jsKwargs["name"];
   let edgeContent = jsKwargs["content"];
 
-  edgeJson["group"] = "edges";
   edgeJson["data"] = {
     "id": edgeId,
     "source": edgeSourceId,
