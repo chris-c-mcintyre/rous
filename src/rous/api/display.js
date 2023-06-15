@@ -173,5 +173,5 @@ function renderDisplayObject( jsArgs, jsKwargs )
   document.body.appendChild(displayDiv);
 }
 
-export { generateDocumentTitle, generateDocumentFavicon, generateDisplayLayer, generateDisplayObject, renderDisplayObject };
+export { generateDocumentTitle, generateDocumentFavicon, addDisplayEdgeProperties, createDisplayEdge, generateDisplayLayer, generateDisplayObject, renderDisplayObject };
 
