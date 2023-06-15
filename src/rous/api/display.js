@@ -44,7 +44,6 @@ function addDisplayNodeProperties( jsArgs, jsKwargs )
   let nodeName = jsKwargs["name"];
   let nodeContent = jsKwargs["content"];
 
-  let nodeJson = {};
   nodeJson["data"] = {
     "id": nodeId
   };
