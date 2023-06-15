@@ -21,6 +21,25 @@ function addCytoNodeProperties( jsArgs, jsKwargs )
   return nodeJson;
 }
 
+function addCytoEdgeProperties( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let edgeJson = jsArgs[0];
+
+  // jsKwargs
+  let edgeLocked = jsKwargs["locked"] ?? false;
+  let edgePannable = jsKwargs["pannable"] ?? true;
+  let edgeSelectable = jsKwargs["selectable"] ?? true;
+
+  edgeJson["group"] = "edges";
+
+  edgeJson["locked"] = edgeLocked;
+  edgeJson["pannable"] = edgePannable;
+  edgeJson["selectable"] = edgeSelectable;
+
+  return edgeJson;
+}
+
 function createCytoNode( jsArgs, jsKwargs )
 {
   // jsArgs
@@ -39,6 +58,27 @@ function createCytoNode( jsArgs, jsKwargs )
   cytoNode = addCytoNodeProperties( [ cytoNode ], { "locked": nodeLocked, "pannable": nodePannable, "selectable": nodeSelectable } );
 
   return cytoNode;
+}
+
+function createCytoEdge( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let edgeId = jsArgs[0];
+  let edgeSource = jsArgs[1];
+  let edgeTarget = jsArgs[2];
+
+  // jsKwargs
+  let edgeName = jsKwargs["name"];
+  let edgeContent = jsKwargs["content"] ?? {};
+  let edgeLocked = jsKwargs["locked"] ?? false;
+  let edgePannable = jsKwargs["pannable"] ?? true;
+  let edgeSelectable = jsKwargs["selectable"] ?? true;
+
+  let cytoEdge = createDisplayEdge( [ edgeId, edgeSource, edgeTarget ], { "name": edgeName, "content": edgeContent } );
+
+  cytoEdge = addCytoEdgeProperties( [ cytoEdge ], { "locked": edgeLocked, "pannable": edgePannable, "selectable": edgeSelectable } );
+
+  return cytoEdge;
 }
 
 export { addCytoNodeProperties, createCytoNode };
