@@ -44,6 +44,15 @@ class TestWodeMethods(unittest.TestCase):
   def test_end(self):
     self.assertEqual(word(self.the_end,use_opted=False), self.correct_pair)
 
+  def test_opted_word(self):
+    self.assertEqual(word(use_opted=True)[0], self.valid_word)
+
+  def test_opted_defn_type(self):
+    self.assertEqual(type(word(use_opted=True)[1]), "string")
+
+  def test_opted_defn_len(self):
+    self.assertTrue(len(word(use_opted=True)[1]) > 0)
+
 if __name__ == '__main__':
   unittest.main()
 
