@@ -82,7 +82,7 @@ def dictionary( dictionary_path = data_path ):
 
   return wode_dictionary
 
-def get_definition( dictionary_path, input_word, input_word_class = None, banned_roots = ["fatal"] ):
+def get_definition( input_word, input_word_class = None, dictionary_path = "data/opted/opted.txt", banned_roots = ["fatal"] ):
 
   # Q: are these arbitrary magic values?
   # A: || there is only one valid suffix, and only one valid prefix ||
