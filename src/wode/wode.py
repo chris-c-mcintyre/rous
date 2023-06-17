@@ -82,7 +82,7 @@ def dictionary( dictionary_path = data_path ):
 
   return wode_dictionary
 
-def get_definition( input_word, input_word_class = None, dictionary_path = "data/opted/opted.txt", banned_roots = ["fatal"] ):
+def get_definition( input_word, input_word_class = None, dictionary_path = "data/opted/opted.txt", banned_roots = ["fatal"], start_type = "random" ):
 
   # Q: are these arbitrary magic values?
   # A: || there is only one valid suffix, and only one valid prefix ||
@@ -93,7 +93,12 @@ def get_definition( input_word, input_word_class = None, dictionary_path = "data
 
   dictionary_size = os.stat( dictionary_path ).st_size
 
-  start_byte = random.randrange( 0, dictionary_size )
+  if start_type == "random":
+    start_byte = random.randrange( 0, dictionary_size )
+  elif start_type == "start":
+    start_byte = 0
+  elif start_type == "end":
+    start_byte = dictionary_size - 1
 
   with open(dictionary_path, "r") as dictionary_file:
 
