@@ -48,7 +48,7 @@ class TestWodeMethods(unittest.TestCase):
     self.assertEqual(word(use_opted=True)[0], self.valid_word)
 
   def test_opted_defn_type(self):
-    self.assertEqual(type(word(use_opted=True)[1]), "string")
+    self.assertEqual(type(word(use_opted=True)[1]), str)
 
   def test_opted_defn_len(self):
     self.assertTrue(len(word(use_opted=True)[1]) > 0)
