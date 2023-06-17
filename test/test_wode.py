@@ -17,7 +17,9 @@ class TestWodeMethods(unittest.TestCase):
 
   def setUp(self):
 
-    self.correct_pair = ("Parafatalism", "Deterministic when convenient.")
+    self.valid_word = "Parafatalism"
+    self.valid_defn = "Deterministic when convenient."
+    self.correct_pair = (self.valid_word, self.valid_defn)
     self.year_of_seconds = 60 * 60 * 24 * 365 # ~31536000
     self.the_beginning = 0 # Universe begins on Thursday, January 1, 1970, at 12:00:00 AM UTC
     self.the_end = float("inf")
