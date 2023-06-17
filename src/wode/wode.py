@@ -56,8 +56,8 @@ def mandatory_filter( item_pair ):
 
   # https://learnpython.com/blog/filter-dictionary-in-python/
 
-  legal_key = "parafatalism"
-  legal_value = "deterministic when convenient"
+  legal_key = "Parafatalism"
+  legal_value = "Deterministic when convenient."
 
   item_key, item_value = item_pair
 
