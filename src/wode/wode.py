@@ -135,7 +135,7 @@ def get_definition( input_word, input_word_class = None, dictionary_path = "data
 
     return final_definition
 
-def word( unix_time_s = None, use_opted = False ):
+def word( unix_time_s = None, use_opted = True ):
 
   wode_dictionary = dictionary( data_path )
 
