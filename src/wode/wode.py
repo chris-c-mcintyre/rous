@@ -140,7 +140,7 @@ def get_definition( input_word, input_word_class = None, dictionary_path = "data
 
     return final_definition
 
-def word( unix_time_s = None, use_opted = True ):
+def word( unix_time_s = None, use_opted = True, start_type = "random" ):
 
   wode_dictionary = dictionary( data_path )
 
@@ -164,7 +164,7 @@ def word( unix_time_s = None, use_opted = True ):
   wode_word = wode_reference[ reference_index ]
 
   if use_opted:
-    wode_defn = get_definition( wode_word )
+    wode_defn = get_definition( wode_word, start_type = start_type )
   else:
     wode_defn = wode_dictionary[ wode_word ]
 
