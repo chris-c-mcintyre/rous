@@ -23,24 +23,24 @@ class TestWodeMethods(unittest.TestCase):
     self.the_end = float("inf")
 
   def test_default(self):
-    self.assertEqual(word(), self.correct_pair)
+    self.assertEqual(word(use_opted=False), self.correct_pair)
 
   def test_current(self):
-    self.assertEqual(word(time.time()), self.correct_pair)
+    self.assertEqual(word(time.time(),use_opted=False), self.correct_pair)
 
   def test_future(self):
     future_time = time.time() + self.year_of_seconds
-    self.assertEqual(word(future_time), self.correct_pair)
+    self.assertEqual(word(future_time,use_opted=False), self.correct_pair)
 
   def test_past(self):
     past_time = time.time() + self.year_of_seconds
-    self.assertEqual(word(past_time), self.correct_pair)
+    self.assertEqual(word(past_time,use_opted=False), self.correct_pair)
 
   def test_beginning(self):
-    self.assertEqual(word(self.the_beginning), self.correct_pair)
+    self.assertEqual(word(self.the_beginning,use_opted=False), self.correct_pair)
 
   def test_end(self):
-    self.assertEqual(word(self.the_end), self.correct_pair)
+    self.assertEqual(word(self.the_end,use_opted=False), self.correct_pair)
 
 if __name__ == '__main__':
   unittest.main()
