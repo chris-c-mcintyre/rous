@@ -3,6 +3,7 @@
 import json
 import math
 import os
+import random
 import sys
 import time
 
@@ -80,6 +81,59 @@ def dictionary( dictionary_path = data_path ):
   wode_dictionary = dict(wode_items)
 
   return wode_dictionary
+
+def get_definition( dictionary_path, input_word, input_word_class = None, banned_roots = ["fatal"] ):
+
+  # Q: are these arbitrary magic values?
+  # A: || there is only one valid suffix, and only one valid prefix ||
+  pref_len = 4
+  suff_len = 3
+
+  input_word_suff = input_word[-suff_len:]
+
+  dictionary_size = os.stat( dictionary_path ).st_size
+
+  start_byte = random.randrange( 0, dictionary_size )
+
+  with open(dictionary_path, "r") as dictionary_file:
+
+    dictionary_file.seek( start_byte )
+
+    # skip first line due to random point of entry
+    dictionary_file.readline()
+
+    final_definition = ""
+
+    loop_breaker = 0
+
+    while loop_breaker < dictionary_size:
+
+      loop_breaker += 1
+
+      current_line = dictionary_file.readline()
+
+      if len(current_line) == 0:
+        dictionary_file.seek( 0 )
+
+      else:
+        if current_line == "\n":
+          continue
+
+        current_word = current_line[ 0 : current_line.find("(") ].strip()
+
+        if current_word[ pref_len : -suff_len ].lower() in banned_roots:
+          continue
+
+        if input_word_class:
+          current_word_class = current_line[ current_line.find("(")+1 : current_line.find(")") ]
+          if current_word_class != input_word_class:
+            continue
+
+        if current_word[-suff_len:] == input_word_suff:
+          final_definition = current_line[current_line.find(")")+1:].strip()
+          break
+
+    return final_definition
 
 def word( unix_time_s = None ):
 
