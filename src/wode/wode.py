@@ -135,7 +135,7 @@ def get_definition( dictionary_path, input_word, input_word_class = None, banned
 
     return final_definition
 
-def word( unix_time_s = None ):
+def word( unix_time_s = None, use_opted = False ):
 
   wode_dictionary = dictionary( data_path )
 
@@ -158,7 +158,10 @@ def word( unix_time_s = None ):
 
   wode_word = wode_reference[ reference_index ]
 
-  wode_defn = wode_dictionary[ wode_word ]
+  if use_opted:
+    wode_defn = get_definition( wode_word )
+  else:
+    wode_defn = wode_dictionary[ wode_word ]
 
   return ( wode_word, wode_defn )
 
