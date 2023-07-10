@@ -35,6 +35,35 @@ function createCanvasNode( jsArgs, jsKwargs )
 
 /* draw functions */
 
+function clearContext( jsArgs, jsKwargs )
+{
+  let myContext = jsKwargs.context;
+
+  myContext.clearRect
+  (
+    0,
+    0,
+    myContext.canvas.width,
+    myContext.canvas.height
+  );
+}
+
+function cleanContext( jsArgs, jsKwargs )
+{
+  let myContext = jsKwargs.context;
+
+  clearContext( jsArgs, jsKwargs );
+
+  myContext.fillStyle = jsKwargs.fillStyle;
+  myContext.fillRect
+  (
+    0,
+    0,
+    myContext.canvas.width,
+    myContext.canvas.height
+  );
+}
+
 function drawNode( jsArgs, jsKwargs )
 {
   // jsArgs
