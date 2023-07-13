@@ -132,6 +132,50 @@ function drawVectorFromPosition( jsArgs, jsKwargs )
   displayCanvasContext.stroke( );
 }
 
+function drawGrid( jsArgs, jsKwargs )
+{
+  // jsArgs
+  let gridCanvas = jsArgs[0];
+
+  // jsKwargs
+  const gridRowSize = jsKwargs.rowSize ?? 25;
+  const gridColSize = jsKwargs.colSize ?? 25;
+  const gridLineWidth = jsKwargs.lineWidth ?? 1;
+  const gridStrokeStyle = jsKwargs.strokeStyle ?? "rgb(125,125,125)";
+
+  const gridRowCount = Math.floor(gridCanvas.width / gridRowSize) + 1;
+  const gridColCount = Math.floor(gridCanvas.height / gridColSize) + 1;
+
+  let gridCanvasContext = gridCanvas.getContext("2d");
+  let gridRect = gridCanvas.getBoundingClientRect();
+
+  gridCanvasContext.beginPath();
+  gridCanvasContext.lineWidth = gridLineWidth;
+  gridCanvasContext.strokeStyle = gridStrokeStyle;
+
+  gridCanvasContext.moveTo(0, 0);
+  gridCanvasContext.lineTo(gridRect.right, 0);
+
+  for (let i = 1; i < gridRowCount; i++)
+  {
+    const rowPosition = i * gridRowSize;
+    gridCanvasContext.moveTo(0, rowPosition);
+    gridCanvasContext.lineTo(gridRect.right, rowPosition);
+  }
+
+  gridCanvasContext.moveTo(0, 0);
+  gridCanvasContext.lineTo(0, gridRect.bottom);
+
+  for (let i = 1; i < gridColCount; i++)
+  {
+    const colPosition = i * gridColSize;
+    gridCanvasContext.moveTo(colPosition, 0);
+    gridCanvasContext.lineTo(colPosition, gridRect.bottom);
+  }
+
+  gridCanvasContext.stroke();
+}
+
 /* compositional functions */
 
 function canvasDrawLine( jsArgs, jsKwargs )
@@ -180,5 +224,5 @@ let highlightGrid;
 
 /* module exports */
 
-export { addCanvasNodeProperties, createCanvasNode, clearContext, cleanContext, drawNode, drawEdge, drawVectorFromPosition };
+export { addCanvasNodeProperties, createCanvasNode, clearContext, cleanContext, drawNode, drawEdge, drawVectorFromPosition, drawGrid };
 
