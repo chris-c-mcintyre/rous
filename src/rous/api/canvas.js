@@ -224,5 +224,15 @@ let highlightGrid;
 
 /* module exports */
 
-export { addCanvasNodeProperties, createCanvasNode, clearContext, cleanContext, drawNode, drawEdge, drawVectorFromPosition, drawGrid };
+export
+{
+  addCanvasNodeProperties,
+  createCanvasNode,
+  clearContext,
+  cleanContext,
+  drawNode,
+  drawEdge,
+  drawVectorFromPosition,
+  drawGrid
+};
 

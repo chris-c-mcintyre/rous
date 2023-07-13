@@ -93,5 +93,13 @@ function setupFileUpload( jsArgs, jsKwargs )
   fileUploadListener( [ myFileUploadElements[0].id ], { "listener": listenerArgs } );
 }
 
-export { handleReaderLoad, handleFileChange, fileUploadListener, generateFileUpload, renderFileUpload, setupFileUpload };
+export
+{
+  handleReaderLoad,
+  handleFileChange,
+  fileUploadListener,
+  generateFileUpload,
+  renderFileUpload,
+  setupFileUpload
+};
 

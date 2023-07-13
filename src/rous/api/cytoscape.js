@@ -81,5 +81,11 @@ function createCytoEdge( jsArgs, jsKwargs )
   return cytoEdge;
 }
 
-export { addCytoNodeProperties, addCytoEdgeProperties, createCytoNode, createCytoEdge };
+export
+{
+  addCytoNodeProperties,
+  addCytoEdgeProperties,
+  createCytoNode,
+  createCytoEdge
+};
 
