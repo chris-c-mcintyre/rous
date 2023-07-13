@@ -264,119 +264,12 @@ globalThis.getSelectedNodes = function()
 
 // load with template elements
 
-let templateElements = [];
+function getTemplateElements( jsonPath = "./data/template-elements.json" )
+{
+  return fetch( jsonPath ).then(response => { return response.json() });
+}
 
-let templateNodeA = {};
-templateNodeA["group"] = "nodes";
-templateNodeA["data"] = {
-  "id": "color-config-template-node-a",
-  "name": "A"
-};
-templateNodeA["position"] = { x: 25, y: 25 };
-templateNodeA["locked"] = true;
-templateNodeA["selectable"] = false;
-templateElements.push(templateNodeA);
-
-let templateNodeB = {};
-templateNodeB["group"] = "nodes";
-templateNodeB["data"] = {
-  "id": "color-config-template-node-b",
-  "name": "B"
-};
-templateNodeB["position"] = { x: 275, y: 25 };
-templateNodeB["locked"] = true;
-templateNodeB["selectable"] = false;
-templateElements.push(templateNodeB);
-
-let templateNodeC = {};
-templateNodeC["group"] = "nodes";
-templateNodeC["data"] = {
-  "id": "color-config-template-node-c",
-  "name": "C"
-};
-templateNodeC["position"] = { x: 150, y: 241 };
-templateNodeC["locked"] = true;
-templateNodeC["selectable"] = false;
-templateElements.push(templateNodeC);
-
-let templateNodeD = {};
-templateNodeD["group"] = "nodes";
-templateNodeD["data"] = {
-  "id": "color-config-template-node-d",
-  "name": "D"
-};
-templateNodeD["position"] = { x: 150, y: 133 };
-templateElements.push(templateNodeD);
-
-let templateEdgeAB = {};
-templateEdgeAB["group"] = "edges";
-templateEdgeAB["data"] = {
-  "id": "color-config-template-edge-ab",
-  "name": "ab",
-  "source": "color-config-template-node-a",
-  "target": "color-config-template-node-b"
-};
-templateEdgeAB["pannable"] = false;
-templateEdgeAB["selectable"] = false;
-templateElements.push(templateEdgeAB);
-
-let templateEdgeBC= {};
-templateEdgeBC["group"] = "edges";
-templateEdgeBC["data"] = {
-  "id": "color-config-template-edge-bc",
-  "name": "bc",
-  "source": "color-config-template-node-b",
-  "target": "color-config-template-node-c"
-};
-templateEdgeBC["pannable"] = false;
-templateEdgeBC["selectable"] = false;
-templateElements.push(templateEdgeBC);
-
-let templateEdgeCA= {};
-templateEdgeCA["group"] = "edges";
-templateEdgeCA["data"] = {
-  "id": "color-config-template-edge-ca",
-  "name": "ca",
-  "source": "color-config-template-node-c",
-  "target": "color-config-template-node-a"
-};
-templateEdgeCA["pannable"] = false;
-templateEdgeCA["selectable"] = false;
-templateElements.push(templateEdgeCA);
-
-let templateEdgeDA= {};
-templateEdgeDA["group"] = "edges";
-templateEdgeDA["data"] = {
-  "id": "color-config-template-edge-da",
-  "name": "da",
-  "source": "color-config-template-node-d",
-  "target": "color-config-template-node-a"
-};
-templateEdgeDA["pannable"] = false;
-templateElements.push(templateEdgeDA);
-
-let templateEdgeDB= {};
-templateEdgeDB["group"] = "edges";
-templateEdgeDB["data"] = {
-  "id": "color-config-template-edge-db",
-  "name": "db",
-  "source": "color-config-template-node-d",
-  "target": "color-config-template-node-b"
-};
-templateEdgeDB["pannable"] = false;
-templateElements.push(templateEdgeDB);
-
-let templateEdgeDC= {};
-templateEdgeDC["group"] = "edges";
-templateEdgeDC["data"] = {
-  "id": "color-config-template-edge-dc",
-  "name": "dc",
-  "source": "color-config-template-node-d",
-  "target": "color-config-template-node-c"
-};
-templateEdgeDC["pannable"] = false;
-templateElements.push(templateEdgeDC);
-
+let templateElements = getTemplateElements();
 
 globalThis.graphs["color-config-minimap"]["graph"] = cytoscape(
 {

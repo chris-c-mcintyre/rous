@@ -1,0 +1,61 @@
+[
+  {
+    "group": "nodes",
+    "data": { "id": "color-config-template-node-a", "name": "A" },
+    "position": { "x": 25, "y": 25 },
+    "locked": true,
+    "selectable": false
+  },
+  {
+    "group": "nodes",
+    "data": { "id": "color-config-template-node-b", "name": "B" },
+    "position": { "x": 275, "y": 25 },
+    "locked": true,
+    "selectable": false
+  },
+  {
+    "group": "nodes",
+    "data": { "id": "color-config-template-node-c", "name": "C" },
+    "position": { "x": 150, "y": 241 },
+    "locked": true,
+    "selectable": false
+  },
+  {
+    "group": "nodes",
+    "data": { "id": "color-config-template-node-d", "name": "D" },
+    "position": { "x": 150, "y": 133 }
+  },
+  {
+    "group": "edges",
+    "data": { "id": "color-config-template-edge-ab", "name": "ab", "source": "color-config-template-node-a", "target": "color-config-template-node-b" },
+    "pannable": false,
+    "selectable": false
+  },
+  {
+    "group": "edges",
+    "data": { "id": "color-config-template-edge-bc", "name": "bc", "source": "color-config-template-node-b", "target": "color-config-template-node-c" },
+    "pannable": false,
+    "selectable": false
+  },
+  {
+    "group": "edges",
+    "data": { "id": "color-config-template-edge-ca", "name": "ca", "source": "color-config-template-node-c", "target": "color-config-template-node-a" },
+    "pannable": false,
+    "selectable": false
+  },
+  {
+    "group": "edges",
+    "data": { "id": "color-config-template-edge-da", "name": "da", "source": "color-config-template-node-d", "target": "color-config-template-node-a" },
+    "pannable": false
+  },
+  {
+    "group": "edges",
+    "data": { "id": "color-config-template-edge-db", "name": "db", "source": "color-config-template-node-d", "target": "color-config-template-node-b" },
+    "pannable": false
+  },
+  {
+    "group": "edges",
+    "data": { "id": "color-config-template-edge-dc", "name": "dc", "source": "color-config-template-node-d", "target": "color-config-template-node-c" },
+    "pannable": false
+  }
+]
