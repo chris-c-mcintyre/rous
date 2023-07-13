@@ -138,10 +138,10 @@ function drawGrid( jsArgs, jsKwargs )
   let gridCanvas = jsArgs[0];
 
   // jsKwargs
-  const gridRowSize = jsKwargs.rowSize ?? 25;
-  const gridColSize = jsKwargs.colSize ?? 25;
-  const gridLineWidth = jsKwargs.lineWidth ?? 1;
-  const gridStrokeStyle = jsKwargs.strokeStyle ?? "rgb(125,125,125)";
+  const gridRowSize = jsKwargs["rowSize"] ?? 25;
+  const gridColSize = jsKwargs["colSize"] ?? 25;
+  const gridLineWidth = jsKwargs["lineWidth"] ?? 1;
+  const gridStrokeStyle = jsKwargs["strokeStyle"] ?? "rgb(125,125,125)";
 
   const gridRowCount = Math.floor(gridCanvas.width / gridRowSize) + 1;
   const gridColCount = Math.floor(gridCanvas.height / gridColSize) + 1;
