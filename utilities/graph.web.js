@@ -443,6 +443,7 @@ export
 {
   valRescale,
   valMeanNorm,
+  valStandard,
   arrMin,
   arrMax,
   arrSum,
@@ -453,6 +454,8 @@ export
   arrRescaleMut,
   arrMeanNorm,
   arrMeanNormMut,
+  arrStandard,
+  arrStandardMut,
   objArrKeyMin,
   objArrKeyMax,
   objArrKeySum,
@@ -462,6 +465,8 @@ export
   objArrKeyRescale,
   objArrKeyRescaleMut,
   objArrKeyMeanNorm,
-  objArrKeyMeanNormMut
+  objArrKeyMeanNormMut,
+  objArrKeyStandard,
+  objArrKeyStandardMut
 }
 
