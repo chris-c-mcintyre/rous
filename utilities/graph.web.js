@@ -227,6 +227,24 @@ function objArrKeyRescale
   return newArr;
 }
 
+function objArrKeyMeanNormMut
+(
+  inpArr,
+  objKey,
+  newMin = 0,
+  newMax = 1
+)
+{
+  const arrMinMaxSum = objArrKeyMinMaxSum(inpArr, objKey);
+  const arrLen = inpArr.length;
+  const arrMean = arrMinMaxSum[2] / arrLen;
+  for (let i = 0; i < arrLen; i++)
+  {
+    inpArr[i][objKey] = valMeanNorm(inpArr[i][objKey], arrMinMaxSum[0], arrMinMaxSum[1], arrMean, newMin, newMax);
+  }
+  return;
+}
+
 function objArrKeyMeanNorm
 (
   inpArr,
@@ -247,6 +265,23 @@ function objArrKeyMeanNorm
 }
 
 // - - array of values
+
+function arrMeanNormMut
+(
+  inpArr,
+  newMin = 0,
+  newMax = 1
+)
+{
+  const arrMinMaxSum = arrMinMaxSum(inpArr);
+  const arrLen = inpArr.length;
+  const arrMean = arrMinMaxSum[2] / arrLen;
+  for (let i = 0; i < arrLen; i++)
+  {
+    inpArr[i] = valMeanNorm(inpArr[i], arrMinMaxSum[0], arrMinMaxSum[1], arrMean, newMin, newMax);
+  }
+  return;
+}
 
 function arrRescaleMut
 (
