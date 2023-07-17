@@ -101,6 +101,21 @@ function arrMinMaxSum
   return [ inpMin, inpMax, inpSum ];
 }
 
+function arrStaDev
+(
+  inpArr
+)
+{
+  const arrLen = inpArr.length;
+  const arrMean = arrSum(inpArr) / arrLen;
+  let staDevSum = 0;
+  for (let i = 0; i < arrLen; i++)
+  {
+    staDevSum += ((inpArr[i] - arrMean) ** 2);
+  }
+  return Math.sqrt(staDevSum / arrLen);
+}
+
 function arrRescale
 (
   inpArr,
@@ -250,6 +265,22 @@ function objArrKeyMinMaxSum
   return [ inpMin, inpMax, inpSum ];
 }
 
+function objArrKeyStaDev
+(
+  inpArr,
+  objKey
+)
+{
+  const arrLen = inpArr.length;
+  const arrMean = objArrKeySum(inpArr, objKey) / arrLen;
+  let staDevSum = 0;
+  for (let i = 0; i < arrLen; i++)
+  {
+    staDevSum += ((inpArr[i][objKey] - arrMean) ** 2);
+  }
+  return Math.sqrt(staDevSum / arrLen);
+}
+
 function objArrKeyRescale
 (
   inpArr,
@@ -333,6 +364,7 @@ export
   arrSum,
   arrMinMax,
   arrMinMaxSum,
+  arrStaDev,
   arrRescale,
   arrRescaleMut,
   arrMeanNorm,
@@ -342,6 +374,7 @@ export
   objArrKeySum,
   objArrKeyMinMax,
   objArrKeyMinMaxSum,
+  objArrKeyStaDev,
   objArrKeyRescale,
   objArrKeyRescaleMut,
   objArrKeyMeanNorm,
