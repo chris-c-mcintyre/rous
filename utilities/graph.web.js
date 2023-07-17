@@ -177,6 +177,19 @@ function valRescale
   return ( newMin + ((( inpVal - inpMin ) * ( newMax - newMin )) / ( inpMax - inpMin )) );
 }
 
+function valMeanNorm
+(
+  inpVal,
+  inpMin,
+  inpMax,
+  inpMean,
+  newMin = 0,
+  newMax = 1
+)
+{
+  return ( newMin + ((( inpVal - inpMean ) * ( newMax - newMin )) / ( inpMax - inpMin )) );
+}
+
 // - - array of objects by key
 
 function objArrKeyRescaleMut
@@ -214,6 +227,25 @@ function objArrKeyRescale
   return newArr;
 }
 
+function objArrKeyMeanNorm
+(
+  inpArr,
+  objKey,
+  newMin = 0,
+  newMax = 1
+)
+{
+  const arrMinMaxSum = objArrKeyMinMaxSum(inpArr, objKey);
+  const arrLen = inpArr.length;
+  const arrMean = arrMinMaxSum[2] / arrLen;
+  const newArr = new Array(arrLen);
+  for (let i = 0; i < arrLen; i++)
+  {
+    newArr[i] = valMeanNorm(inpArr[i][objKey], arrMinMaxSum[0], arrMinMaxSum[1], arrMean, newMin, newMax);
+  }
+  return newArr;
+}
+
 // - - array of values
 
 function arrRescaleMut
@@ -230,6 +262,24 @@ function arrRescaleMut
     inpArr[i] = valRescale(inpArr[i], arrMinMax[0], arrMinMax[1], newMin, newMax);
   }
   return;
+}
+
+function arrMeanNorm
+(
+  inpArr,
+  newMin = 0,
+  newMax = 1
+)
+{
+  const arrMinMaxSum = arrMinMaxSum(inpArr);
+  const arrLen = inpArr.length;
+  const arrMean = arrMinMaxSum[2] / arrLen;
+  const newArr = new Array(arrLen);
+  for (let i = 0; i < arrLen; i++)
+  {
+    newArr[i] = valMeanNorm(inpArr[i], arrMinMaxSum[0], arrMinMaxSum[1], arrMean, newMin, newMax);
+  }
+  return newArr;
 }
 
 function arrRescale
