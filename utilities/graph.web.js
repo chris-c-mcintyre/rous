@@ -283,22 +283,6 @@ function arrMeanNormMut
   return;
 }
 
-function arrRescaleMut
-(
-  inpArr,
-  newMin = 0,
-  newMax = 1
-)
-{
-  const arrMinMax = arrMinMax(inpArr);
-  const arrLen = inpArr.length;
-  for (let i = 0; i < arrLen; i++)
-  {
-    inpArr[i] = valRescale(inpArr[i], arrMinMax[0], arrMinMax[1], newMin, newMax);
-  }
-  return;
-}
-
 function arrMeanNorm
 (
   inpArr,
@@ -315,6 +299,22 @@ function arrMeanNorm
     newArr[i] = valMeanNorm(inpArr[i], arrMinMaxSum[0], arrMinMaxSum[1], arrMean, newMin, newMax);
   }
   return newArr;
+}
+
+function arrRescaleMut
+(
+  inpArr,
+  newMin = 0,
+  newMax = 1
+)
+{
+  const arrMinMax = arrMinMax(inpArr);
+  const arrLen = inpArr.length;
+  for (let i = 0; i < arrLen; i++)
+  {
+    inpArr[i] = valRescale(inpArr[i], arrMinMax[0], arrMinMax[1], newMin, newMax);
+  }
+  return;
 }
 
 function arrRescale
