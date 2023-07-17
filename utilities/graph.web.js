@@ -345,6 +345,6 @@ export
   objArrKeyRescale,
   objArrKeyRescaleMut,
   objArrKeyMeanNorm,
-  objArrKeyMeanNormMut\
+  objArrKeyMeanNormMut
 }
 
