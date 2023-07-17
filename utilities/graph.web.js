@@ -25,6 +25,18 @@ function valMeanNorm
   return ( newMin + ((( inpVal - inpMean ) * ( newMax - newMin )) / ( inpMax - inpMin )) );
 }
 
+function valStandard
+(
+  inpVal,
+  inpMean,
+  inpStaDev,
+  newMin = 0,
+  newMax = 1
+)
+{
+  return ( newMin + ((( inpVal - inpMean ) * ( newMax - newMin )) / inpStaDev) );
+}
+
 function arrMin
 (
   inpArr
