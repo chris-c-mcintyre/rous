@@ -345,8 +345,13 @@ export
   arrMin,
   arrMax,
   valRescale,
+  valMeanNorm,
   objArrKeyRescaleMut,
   objArrKeyRescale,
+  objArrKeyMeanNormMut,
+  objArrKeyMeanNorm,
+  arrMeanNormMut,
+  arrMeanNorm,
   arrRescaleMut,
   arrRescale
 }
