@@ -4,6 +4,25 @@
 
 // - - array of objects by key
 
+function objArrKeyMinMaxSum
+(
+  inpArr,
+  objKey
+)
+{
+  const arrLen = inpArr.length;
+  let inpMax = inpArr[0][objKey];
+  let inpMin = inpArr[0][objKey];
+  let inpSum = inpArr[0][objKey];
+  for (let i = 1; i < arrLen; ++i)
+  {
+    if (inpArr[i][objKey] > inpMax) inpMax = inpArr[i][objKey];
+    if (inpArr[i][objKey] < inpMin) inpMin = inpArr[i][objKey];
+    inpSum += inpArr[i][objKey];
+  }
+  return [ inpMin, inpMax, inpSum ];
+}
+
 function objArrKeyMinMax
 (
   inpArr,
@@ -51,7 +70,40 @@ function objArrKeyMax
   return inpMax;
 }
 
+function objArrKeySum
+(
+  inpArr,
+  objKey
+)
+{
+  const arrLen = inpArr.length;
+  let inpSum = inpArr[0][objKey];
+  for (let i = 1; i < arrLen; ++i)
+  {
+    inpSum += inpArr[i][objKey];
+  }
+  return inpSum;
+}
+
 // - - array of values
+
+function arrMinMaxSum
+(
+  inpArr
+)
+{
+  const arrLen = inpArr.length;
+  let inpMax = inpArr[0];
+  let inpMin = inpArr[0];
+  let inpSum = inpArr[0];
+  for (let i = 1; i < arrLen; ++i)
+  {
+    if (inpArr[i] > inpMax) inpMax = inpArr[i];
+    if (inpArr[i] < inpMin) inpMin = inpArr[i];
+    inpSum += inpArr[i];
+  }
+  return [ inpMin, inpMax, inpSum ];
+}
 
 function arrMinMax
 (
@@ -95,6 +147,20 @@ function arrMax
     if (inpArr[i] > inpMax) inpMax = inpArr[i];
   }
   return inpMax;
+}
+
+function arrSum
+(
+  inpArr
+)
+{
+  const arrLen = inpArr.length;
+  let inpSum = inpArr[0];
+  for (let i = 1; i < arrLen; ++i)
+  {
+    inpSum += inpArr[i];
+  }
+  return inpSum;
 }
 
 // - rescale
