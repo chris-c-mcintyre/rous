@@ -338,12 +338,16 @@ function arrRescale
 
 export
 {
+  objArrKeyMinMaxSum,
   objArrKeyMinMax,
   objArrKeyMin,
   objArrKeyMax,
+  objArrKeySum,
+  arrMinMaxSum,
   arrMinMax,
   arrMin,
   arrMax,
+  arrSum,
   valRescale,
   valMeanNorm,
   objArrKeyRescaleMut,
