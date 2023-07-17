@@ -191,7 +191,7 @@ function objArrKeyRescaleMut
   const arrLen = inpArr.length;
   for (let i = 0; i < arrLen; i++)
   {
-    inpArr[i][objKey] = rescaleVal(inpArr[i][objKey], arrMinMax[0], arrMinMax[1], newMin, newMax);
+    inpArr[i][objKey] = valRescale(inpArr[i][objKey], arrMinMax[0], arrMinMax[1], newMin, newMax);
   }
   return;
 }
@@ -209,7 +209,7 @@ function objArrKeyRescale
   const newArr = new Array(arrLen);
   for (let i = 0; i < arrLen; i++)
   {
-    newArr[i] = rescaleVal(inpArr[i][objKey], arrMinMax[0], arrMinMax[1], newMin, newMax);
+    newArr[i] = valRescale(inpArr[i][objKey], arrMinMax[0], arrMinMax[1], newMin, newMax);
   }
   return newArr;
 }
@@ -244,7 +244,7 @@ function arrRescale
   const newArr = new Array(arrLen);
   for (let i = 0; i < arrLen; i++)
   {
-    newArr[i] = rescaleVal(inpArr[i], arrMinMax[0], arrMinMax[1], newMin, newMax);
+    newArr[i] = valRescale(inpArr[i], arrMinMax[0], arrMinMax[1], newMin, newMax);
   }
   return newArr;
 }
