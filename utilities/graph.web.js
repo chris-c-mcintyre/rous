@@ -196,6 +196,41 @@ function arrMeanNormMut
   return;
 }
 
+function arrStandard
+(
+  inpArr,
+  newMin = 0,
+  newMax = 1
+)
+{
+  const arrLen = inpArr.length;
+  const arrMean = arrSum(inpArr) / arrLen;
+  const staDev = arrStaDev(inpArr);
+  const newArr = new Array(arrLen);
+  for (let i = 0; i < arrLen; i++)
+  {
+    newArr[i] = valStandard(inpArr[i], arrMean, staDev, newMin, newMax);
+  }
+  return newArr;
+}
+
+function arrStandardMut
+(
+  inpArr,
+  newMin = 0,
+  newMax = 1
+)
+{
+  const arrLen = inpArr.length;
+  const arrMean = arrSum(inpArr) / arrLen;
+  const staDev = arrStaDev(inpArr);
+  for (let i = 0; i < arrLen; i++)
+  {
+    inpArr[i] = valStandard(inpArr[i], arrMean, staDev, newMin, newMax);
+  }
+  return;
+}
+
 function objArrKeyMin
 (
   inpArr,
@@ -361,6 +396,43 @@ function objArrKeyMeanNormMut
   for (let i = 0; i < arrLen; i++)
   {
     inpArr[i][objKey] = valMeanNorm(inpArr[i][objKey], arrMinMaxSum[0], arrMinMaxSum[1], arrMean, newMin, newMax);
+  }
+  return;
+}
+
+function objArrKeyStandard
+(
+  inpArr,
+  objKey,
+  newMin = 0,
+  newMax = 1
+)
+{
+  const arrLen = inpArr.length;
+  const arrMean = objArrKeySum(inpArr, objKey) / arrLen;
+  const staDev = objArrKeyStaDev(inpArr, objKey);
+  const newArr = new Array(arrLen);
+  for (let i = 0; i < arrLen; i++)
+  {
+    newArr[i] = valStandard(inpArr[i][objKey], arrMean, staDev, newMin, newMax);
+  }
+  return newArr;
+}
+
+function objArrKeyStandardMut
+(
+  inpArr,
+  objKey,
+  newMin = 0,
+  newMax = 1
+)
+{
+  const arrLen = inpArr.length;
+  const arrMean = objArrKeySum(inpArr, objKey) / arrLen;
+  const staDev = arrStaDev(inpArr, objKey);
+  for (let i = 0; i < arrLen; i++)
+  {
+    inpArr[i][objKey] = valStandard(inpArr[i][objKey], arrMean, staDev, newMin, newMax);
   }
   return;
 }
