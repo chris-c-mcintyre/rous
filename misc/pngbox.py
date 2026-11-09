@@ -20,7 +20,7 @@ def main():
     imagemax = 2000
 
     # default args
-    imagename = "data/test.png"
+    imagename = "test.png"
     jumpsize = 8
     gridsize = 1
     gridwide = 1
