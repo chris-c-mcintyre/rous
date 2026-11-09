@@ -409,6 +409,162 @@ def update_output(list_of_contents, list_of_names, list_of_dates):
 
     return children
 
+
+@callback(
+  Output({"type": "sur-fig", "index": MATCH}, "figure"),
+  Input({"type": "sur-btn", "index": MATCH}, "n_clicks"),
+  Input({"type": "sur-sli", "index": MATCH}, "value"),
+  State({"type": "sur-opt", "index": MATCH}, "value"),
+  prevent_initial_call=True,
+)
+def button_handle(
+  btn,
+  sli,
+  opt,
+):
+
+  pat_upd = {
+    "data": False,
+    "colo": False,
+    "csca": False,
+    "opac": False,
+    "osca": False,
+  }
+
+  if sli != sha_fig_dic["cont"]:
+
+    run_img_sta = time.time()
+
+    input_group = json.loads(ctx.triggered[0]["prop_id"].split(".")[0])["index"]
+    new_con = sha_con_lis[input_group][sli]
+    new_con = new_con[new_con.index(","):]
+    run_img(new_con)
+
+    sha_fig_dic["cont"] = sli
+
+    pat_upd["data"] = True
+    pat_upd["colo"] = True
+    pat_upd["csca"] = True
+    pat_upd["opac"] = True
+    pat_upd["osca"] = True
+
+    run_img_sto = time.time()
+
+  if "gra" in opt:
+
+    gra_sta = time.time()
+
+    sur_gra = get_arr_gra(
+      sha_fig_dic["data"],
+      nor_min=0,
+      nor_max=0.5,
+    )
+    gra_dat = np.add(np.fabs(sur_gra[0]), np.fabs(sur_gra[1]))
+    sha_fig_dic["data"] = np.multiply(sha_fig_dic["data"], gra_dat)
+
+    pat_upd["data"] = True
+
+    gra_sto = time.time()
+
+  if "gro" in opt:
+
+    gro_sta = time.time()
+
+    sur_gro = get_arr_gra(
+      sha_fig_dic["data"],
+      nor_min=1.0,
+      nor_max=2.0,
+    )
+    gro_dat = np.add(np.fabs(sur_gro[0]), np.fabs(sur_gro[1]))
+    sha_fig_dic["data"] = np.multiply(sha_fig_dic["data"], gro_dat)
+
+    pat_upd["data"] = True
+
+    gro_sto = time.time()
+
+  if "inv" in opt:
+
+    inv_sta = time.time()
+
+    sha_fig_dic["colo"] = np.apply_along_axis(
+      val_piv,
+      1,
+      sha_fig_dic["colo"],
+    )
+
+    pat_upd["colo"] = True
+
+    sha_fig_dic["csca"] = get_col_sca(
+      sha_fig_dic["colo"],
+      col_min="black",
+      col_max="white",
+    )
+
+    pat_upd["csca"] = True
+
+    inv_sto = time.time()
+
+  if "piv" in opt:
+
+    piv_sta = time.time()
+
+    sha_fig_dic["data"] = np.apply_along_axis(val_piv, 1, sha_fig_dic["data"])
+
+    pat_upd["data"] = True
+
+    piv_sto = time.time()
+
+  if "rot" in opt:
+
+    rot_sta = time.time()
+
+    sha_fig_dic["data"] = np.rot90(sha_fig_dic["data"], k=1, axes=(0, 1))
+    sha_fig_dic["colo"] = np.rot90(sha_fig_dic["colo"], k=1, axes=(0, 1))
+
+    pat_upd["data"] = True
+    pat_upd["colo"] = True
+
+    rot_sto = time.time()
+
+  if "fli" in opt:
+
+    fli_sta = time.time()
+
+    sha_fig_dic["data"] = np.fliplr(sha_fig_dic["data"])
+    sha_fig_dic["colo"] = np.fliplr(sha_fig_dic["colo"])
+
+    pat_upd["data"] = True
+    pat_upd["colo"] = True
+
+    fli_sto = time.time()
+
+  if "flo" in opt:
+
+    flo_sta = time.time()
+
+    sha_fig_dic["data"] = np.flipud(sha_fig_dic["data"])
+    sha_fig_dic["colo"] = np.flipud(sha_fig_dic["colo"])
+
+    pat_upd["data"] = True
+    pat_upd["colo"] = True
+
+    flo_sto = time.time()
+
+  pat_sta = time.time()
+
+  # Creating a Patch object
+  patched_figure = Patch()
+
+  if pat_upd["osca"]: patched_figure["data"][1]["opacityscale"] = sha_fig_dic["osca"]
+  if pat_upd["opac"]: patched_figure["data"][1]["opacity"] = sha_fig_dic["opac"]
+  if pat_upd["csca"]: patched_figure["data"][1]["colorscale"] = sha_fig_dic["csca"]
+  if pat_upd["colo"]: patched_figure["data"][1]["surfacecolor"] = sha_fig_dic["colo"]
+  if pat_upd["data"]: patched_figure["data"][1]["z"] = sha_fig_dic["data"]
+
+  pat_sto = time.time()
+
+  return patched_figure
+
 def main() -> int:
 
   # dash
