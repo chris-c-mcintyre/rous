@@ -68,6 +68,22 @@ def add_fort(arr_dat, arr_max = None):
     arr_dat[-1][j] = arr_max
 
   return arr_dat
+  
+def get_str_dat(img_bsf):
+
+  # https://codoraven.com/tutorials/opencv-vs-pillow/image-base64/
+
+  img_str = base64.b64decode(img_bsf)
+
+  #img_arr = np.fromstring(img_str, np.uint8)
+  """
+  The binary mode of fromstring is deprecated, as it behaves surprisingly on unicode inputs. Use frombuffer instead
+  """
+  img_arr = np.frombuffer(img_str, np.uint8)
+
+  img_dat = cv2.imdecode(img_arr, cv2.IMREAD_COLOR)
+
+  return img_dat
 
 def fix_img_siz(img_dat, img_siz_max=2000):
 
