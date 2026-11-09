@@ -170,6 +170,30 @@ def pad_img_siz(img_dat, img_siz_max=2000, img_pad_fil=0):
 
   return img_dat
 
+def sep_img_arr(img_dat):
+
+  a_dat = img_dat[:,:,0]
+  b_dat = img_dat[:,:,1]
+  c_dat = img_dat[:,:,2]
+
+  return [a_dat, b_dat, c_dat]
+
+def get_hsv_arr(img_dat):
+
+  hsv_dat = cv2.cvtColor(img_dat, cv2.COLOR_BGR2HSV_FULL)
+
+  hsv_arr = sep_img_arr(hsv_dat)
+
+  return hsv_arr
+
+def get_rgb_arr(img_dat):
+
+  rgb_dat = cv2.cvtColor(img_dat, cv2.COLOR_BGR2RGB)
+
+  rgb_arr = sep_img_arr(rgb_dat)
+
+  return rgb_arr
+
 def run_img(
   img_con,
 ):
