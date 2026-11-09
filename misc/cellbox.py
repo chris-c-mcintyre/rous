@@ -127,6 +127,49 @@ def fix_img_rat(img_dat, img_rat_min=1.0, img_pad_fil=0):
 
   return img_dat
 
+def sca_img_siz(img_dat, img_sca=2, img_siz_max=2000):
+
+  img_dat = cv2.resize(img_dat, None, fx= img_sca, fy= img_sca, interpolation= cv2.INTER_CUBIC)
+
+  img_dat = fix_img_siz(img_dat, img_siz_max=img_siz_max)
+
+  return img_dat
+
+def pad_img_siz(img_dat, img_siz_max=2000, img_pad_fil=0):
+
+  img_x = len(img_dat)
+  img_y = len(img_dat[0])
+
+  if img_x < img_siz_max:
+
+    x_dif = abs(img_siz_max - img_x)
+
+    if x_dif % 2:
+      img_dat = np.hstack((np.full(shape=(img_x, 1, 3),fill_value=img_pad_fil,dtype=img_dat.dtype),img_dat))
+      img_x = len(img_dat)
+      x_dif = x_dif - 1
+
+    img_x_dif = math.floor((x_dif) / 2)
+
+    img_dat = np.hstack((np.full(shape=(img_x, img_x_dif, 3),fill_value=img_pad_fil,dtype=img_dat.dtype),img_dat))
+    img_dat = np.hstack((img_dat,np.full(shape=(img_x, img_x_dif, 3),fill_value=img_pad_fil,dtype=img_dat.dtype)))
+
+  if img_y < img_siz_max:
+
+    y_dif = abs(img_siz_max - img_y)
+
+    if y_dif % 2:
+      img_dat = np.vstack((np.full(shape=(1, img_siz_max, 3),fill_value=img_pad_fil,dtype=img_dat.dtype),img_dat))
+      img_y = len(img_dat[0])
+      y_dif = x_dif - 1
+
+    img_y_dif = math.floor((y_dif) / 2)
+
+    img_dat = np.vstack((np.full(shape=(img_y_dif, img_siz_max, 3),fill_value=img_pad_fil,dtype=img_dat.dtype),img_dat))
+    img_dat = np.vstack((img_dat,np.full(shape=(img_y_dif, img_siz_max, 3),fill_value=img_pad_fil,dtype=img_dat.dtype)))
+
+  return img_dat
+
 def run_img(
   img_con,
 ):
