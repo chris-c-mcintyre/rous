@@ -17,6 +17,20 @@ import math
 import sys
 import time
 
+# share
+
+sha_con_lis = []
+
+sha_fig_dic = {
+  "cont": 0,
+  "fort": add_fort(np.zeros(shape=(2000,2000),dtype=np.uint16),2000),
+  "data": np.zeros(shape=(2000,2000),dtype=np.uint16),
+  "colo": np.zeros(shape=(2000,2000),dtype=np.uint16),
+  "csca": [],
+  "opac": 1,
+  "osca": [],
+}
+
 # methods
 
 def add_pole(arr_dat, arr_max = None):
@@ -54,6 +68,63 @@ def add_fort(arr_dat, arr_max = None):
     arr_dat[-1][j] = arr_max
 
   return arr_dat
+
+def parse_contents(contents):
+
+  sha_con_lis.append(contents)
+
+  parse_i = len(sha_con_lis)-1
+
+  run_img(contents[0][contents[0].index(","):])
+
+  sha_fig_dic["cont"] = 0
+
+  img_fig = lay_sur_fig(
+    sha_fig_dic["data"],
+    sha_fig_dic["colo"],
+    sha_fig_dic["csca"],
+    sha_fig_dic["opac"],
+    sha_fig_dic["osca"],
+  )
+
+  ret_div = html.Div([
+
+    html.Hr(),
+    dcc.Slider(
+      min=0,
+      max=len(contents)-1,
+      step=1,
+      value=0,
+      included=False,
+      tooltip={"placement": "bottom", "always_visible": True},
+      id={"type": "sur-sli", "index": parse_i},
+    ),
+    dcc.Graph(
+      figure=img_fig,
+      id={"type": "sur-fig", "index": parse_i},
+    ),
+    dcc.Checklist(
+      options=[
+       {'value': 'gra', 'label': 'Grade'},
+       {'value': 'gro', 'label': 'Grode'},
+       {'value': 'inv', 'label': 'Invert'},
+       {'value': 'piv', 'label': 'Pivot'},
+       {'value': 'rot', 'label': 'Turn'},
+       {'value': 'fli', 'label': 'Flip'},
+       {'value': 'flo', 'label': 'Flop'},
+      ],
+      value=[],
+      id={"type": "sur-opt", "index": parse_i},
+    ),
+    html.Button(
+      'Update',
+      id={"type": "sur-btn", "index": parse_i},
+      n_clicks=0
+    ),
+    html.Hr(),
+  ])
+
+  return ret_div
 
 @callback(
   Output('output-image-upload', 'children'),
