@@ -125,6 +125,26 @@ def main():
       arrdata[0][j] = arrmax
       arrdata[-1][j] = arrmax
 
+    # figure
+    imagefiggo = go.Figure(
+      data=[
+        go.Surface(
+          z=arrdata,
+          colorscale='gray',
+          hoverinfo='skip',
+          showlegend=False,
+          showscale=True,
+        ),
+      ])
+
+    imagefiggo.update_layout(
+      title=imagename,
+      autosize=False,
+      width=900, height=900,
+    )
+
+    imagefiggo.show()
+
 if __name__ == "__main__":
     main()
 
