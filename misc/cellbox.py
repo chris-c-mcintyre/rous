@@ -69,6 +69,78 @@ def add_fort(arr_dat, arr_max = None):
 
   return arr_dat
 
+def run_img(
+  img_con,
+):
+
+  img_dat = get_str_dat(img_con)
+
+  img_dat = fix_img_siz(img_dat)
+  img_dat = fix_img_rat(img_dat)
+
+  img_dat = pad_img_siz(img_dat)
+
+  #[r_arr, g_arr, b_arr] = get_rgb_arr(img_dat)
+  [h_arr, s_arr, v_arr] = get_hsv_arr(img_dat)
+
+  sur_dat = v_arr
+  sur_col = v_arr
+
+  col_sca = get_col_sca(
+    sur_col,
+    col_min="rgb(0,0,0)",
+    col_max="rgb(255,255,255)",
+  )
+
+  sur_opa = 1
+
+  opa_sca = get_opa_flo(sur_dat)
+
+  sha_fig_dic["data"] = sur_dat
+  sha_fig_dic["colo"] = sur_col
+  sha_fig_dic["csca"] = col_sca
+  sha_fig_dic["opac"] = sur_opa
+  sha_fig_dic["osca"] = opa_sca
+
+  return 0
+
+def lay_sur_fig(arr_dat, sur_col, col_sca, opa_mul, opa_sca):
+
+  dat_sur_lis = []
+
+  sur_for = go.Surface(
+    z=sha_fig_dic["fort"],
+    colorscale='amp',
+    hoverinfo='skip',
+    opacity=1,
+    showlegend=False,
+    showscale=False,
+  )
+  dat_sur_lis.append(sur_for)
+
+  dat_sur = go.Surface(
+    z=arr_dat,
+    colorscale=col_sca,
+    hoverinfo='skip',
+    opacity=opa_mul,
+    opacityscale=opa_sca,
+    showlegend=False,
+    showscale=False,
+    surfacecolor=sur_col,
+  )
+  dat_sur_lis.append(dat_sur)
+
+  sur_fig = go.Figure(
+    data=dat_sur_lis,
+  )
+
+  sur_fig.update_layout(
+    autosize=False,
+    width=900, height=900,
+  )
+
+  return sur_fig
+
 def parse_contents(contents):
 
   sha_con_lis.append(contents)
