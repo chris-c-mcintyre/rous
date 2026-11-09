@@ -54,3 +54,40 @@ def add_fort(arr_dat, arr_max = None):
     arr_dat[-1][j] = arr_max
 
   return arr_dat
+
+def main() -> int:
+
+  # dash
+
+  app = Dash()
+
+  # https://dash.plotly.com/dash-core-components/upload
+
+  app.layout = html.Div([
+    dcc.Upload(
+      id='upload-image',
+      children=html.Div([
+        'Drag and Drop or ',
+        html.A('Select Files')
+      ]),
+      style={
+        'width': '100%',
+        'height': '60px',
+        'lineHeight': '60px',
+        'borderWidth': '1px',
+        'borderStyle': 'dashed',
+        'borderRadius': '5px',
+        'textAlign': 'center',
+        'margin': '10px'
+      },
+      # Allow multiple files to be uploaded
+      multiple=True,
+    ),
+    html.Div(id='output-image-upload'),
+  ])
+
+  app.run_server()
+
+  return 0
+
+if __name__ == '__main__': sys.exit(main())
