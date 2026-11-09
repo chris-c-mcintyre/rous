@@ -21,15 +21,7 @@ import time
 
 sha_con_lis = []
 
-sha_fig_dic = {
-  "cont": 0,
-  "fort": add_fort(np.zeros(shape=(2000,2000),dtype=np.uint16),2000),
-  "data": np.zeros(shape=(2000,2000),dtype=np.uint16),
-  "colo": np.zeros(shape=(2000,2000),dtype=np.uint16),
-  "csca": [],
-  "opac": 1,
-  "osca": [],
-}
+sha_fig_dic = {}
 
 # methods
 
@@ -612,6 +604,18 @@ def button_handle(
   return patched_figure
 
 def main() -> int:
+
+  # share
+
+  sha_fig_dic = {
+    "cont": 0,
+    "fort": add_fort(np.zeros(shape=(2000,2000),dtype=np.uint16),2000),
+    "data": np.zeros(shape=(2000,2000),dtype=np.uint16),
+    "colo": np.zeros(shape=(2000,2000),dtype=np.uint16),
+    "csca": [],
+    "opac": 1,
+    "osca": [],
+  }
 
   # dash
 
