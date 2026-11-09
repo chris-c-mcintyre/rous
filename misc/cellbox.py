@@ -69,6 +69,48 @@ def add_fort(arr_dat, arr_max = None):
 
   return arr_dat
 
+def fix_img_siz(img_dat, img_siz_max=2000):
+
+  img_x = len(img_dat)
+  img_y = len(img_dat[0])
+
+  if img_x > img_siz_max or img_y > img_siz_max:
+
+    img_sca = img_siz_max / max(img_x, img_y)
+
+    img_dat = cv2.resize(img_dat, None, fx= img_sca, fy= img_sca, interpolation= cv2.INTER_AREA)
+
+  return img_dat
+
+def fix_img_rat(img_dat, img_rat_min=1.0, img_pad_fil=0):
+
+  img_x = len(img_dat)
+  img_y = len(img_dat[0])
+
+  img_rat = (min(img_x, img_y)) / (max(img_x, img_y))
+
+  if img_rat < img_rat_min:
+
+    rat_dif = (abs(img_x - img_y))
+
+    mat_dif = math.floor(rat_dif / 2)
+
+    if img_x > img_y:
+
+      if rat_dif % 2: img_dat = np.hstack((np.full(shape=(img_x, 1, 3),fill_value=img_pad_fil,dtype=img_dat.dtype),img_dat))
+
+      img_dat = np.hstack((np.full(shape=(img_x, mat_dif, 3),fill_value=img_pad_fil,dtype=img_dat.dtype),img_dat))
+      img_dat = np.hstack((img_dat,np.full(shape=(img_x, mat_dif, 3),fill_value=img_pad_fil,dtype=img_dat.dtype)))
+
+    elif img_y > img_x:
+
+      if rat_dif % 2: img_dat = np.vstack((np.full(shape=(1, img_y, 3),fill_value=img_pad_fil,dtype=img_dat.dtype),img_dat))
+
+      img_dat = np.vstack((np.full(shape=(mat_dif, img_y, 3),fill_value=img_pad_fil,dtype=img_dat.dtype),img_dat))
+      img_dat = np.vstack((img_dat,np.full(shape=(mat_dif, img_y, 3),fill_value=img_pad_fil,dtype=img_dat.dtype)))
+
+  return img_dat
+
 def run_img(
   img_con,
 ):
