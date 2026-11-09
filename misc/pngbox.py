@@ -86,6 +86,45 @@ def main():
 
     hsvdata = cv2.cvtColor(imagedata, cv2.COLOR_BGR2HSV_FULL)
 
+    valdata = hsvdata[:,:,2]
+
+    arrdata = valdata
+
+    xgrad, ygrad = np.gradient(arrdata)
+    arrgrad = np.add(xgrad, ygrad)
+
+    arrnorm = arrgrad
+
+    # https://stackoverflow.com/questions/1735025/how-to-normalize-a-numpy-array-to-within-a-certain-range
+
+    # Normalised [0,255] as integer: don't forget the parenthesis before astype(int)
+    #arrnorm = (255*(arrgrad - np.min(arrgrad))/np.ptp(arrgrad)).astype(int)
+
+    # Normalised [0,1]
+    arrnorm = (arrgrad - np.min(arrgrad))/np.ptp(arrgrad)
+
+    # Normalised [-1,1]
+    #arrnorm = 2.*(arrgrad - np.min(arrgrad))/np.ptp(arrgrad)-1
+    #arrnorm = np.fabs(arrnorm)
+
+    # Normalize audio channels to between -1.0 and +1.0
+    #audio /= np.max(np.abs(audio),axis=0)
+
+    # Normalize image to between 0 and 255
+    #image *= (255.0/image.max())
+
+    arrdata = np.multiply(arrdata, arrnorm)
+
+    arrmax = 255 #np.max(arrdata)
+
+    for i in range(imagex):
+      arrdata[i][0] = arrmax
+      arrdata[i][-1] = arrmax
+
+    for j in range(imagey):
+      arrdata[0][j] = arrmax
+      arrdata[-1][j] = arrmax
+
 if __name__ == "__main__":
     main()
 
