@@ -194,6 +194,72 @@ def get_rgb_arr(img_dat):
 
   return rgb_arr
 
+def get_opa_flo(
+  img_arr,
+  opa_min=0,
+  opa_max=1,
+):
+
+  SCA_FLO = 1/255
+
+  opa_sca = []
+
+  opa_sca.append([0,opa_min])
+  opa_sca.append([SCA_FLO,opa_max])
+  opa_sca.append([1, opa_max])
+
+  return opa_sca
+
+def get_opa_cei(
+  img_arr,
+  opa_min=0,
+  opa_max=1,
+):
+
+  SCA_CEI = 254/255
+
+  opa_sca = []
+
+  opa_sca.append([0,opa_max])
+  opa_sca.append([SCA_CEI,opa_max])
+  opa_sca.append([1, opa_min])
+
+  return opa_sca
+
+def get_opa_sca(img_arr):
+
+  img_min = np.min(img_arr)/255
+  img_max = np.max(img_arr)/255
+  img_avg = np.mean(img_arr)/255
+
+  opa_sca = []
+
+  if img_min > 0: opa_sca.append([0, 0])
+  opa_sca.append([img_min, 0])
+  if img_avg < 1: opa_sca.append([img_avg, 1])
+  if img_avg < img_max < 1: opa_sca.append([img_max, 1])
+  opa_sca.append([1, 1])
+
+  return opa_sca
+
+def get_col_sca(
+  img_arr,
+  col_min="rgb(0,0,0)",
+  col_max="rgb(255,255,255)",
+):
+
+  img_min = np.min(img_arr)/255
+  img_max = np.max(img_arr)/255
+
+  col_sca = []
+
+  if img_min > 0: col_sca.append([0, col_min])
+  col_sca.append([img_min, col_min])
+  if img_max < 1: col_sca.append([img_max, col_max])
+  col_sca.append([1, col_max])
+
+  return col_sca
+
 def run_img(
   img_con,
 ):
