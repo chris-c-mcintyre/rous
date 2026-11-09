@@ -194,6 +194,30 @@ def get_rgb_arr(img_dat):
 
   return rgb_arr
 
+def get_arr_gra(arr_dat, gra_min=None, gra_max=None, nor_min=None, nor_max=None):
+
+  arr_gra = np.gradient(
+    arr_dat,
+    #edge_order=2,
+  )
+
+  for i, gra in enumerate(arr_gra):
+
+    if gra_max or gra_min:
+      if gra_max == None: gra_max = np.max(gra)
+      if gra_min == None: gra_min = np.min(gra)
+      gra = np.clip(gra, gra_min, gra_max)
+
+    if nor_max or nor_min:
+      if nor_max == None: nor_max = np.max(arr_dat)
+      if nor_min == None: nor_min = np.min(arr_dat)
+
+      gra = (nor_max-nor_min)*(gra - np.min(gra))/np.ptp(gra)-nor_min
+
+    arr_gra[i] = gra
+
+  return arr_gra
+
 def get_opa_flo(
   img_arr,
   opa_min=0,
