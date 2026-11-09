@@ -284,6 +284,28 @@ def get_col_sca(
 
   return col_sca
 
+def val_piv(
+  val,
+  val_min=0,
+  val_max=255
+):
+
+  # this accidentally works on rows too
+
+  val_ran = (val_max - val_min) + 1
+  val_zer = -1
+
+  if val_ran % 2:
+    val_ran = val_ran - 1
+    val_zer = val_zer + 1
+
+  val_mid = val_min + int(val_ran / 2)
+  val_dif = val_mid - val
+
+  val_ret = val_zer + val_mid + val_dif
+
+  return val_ret
+
 def run_img(
   img_con,
 ):
