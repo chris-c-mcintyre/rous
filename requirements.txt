@@ -1,3 +1,6 @@
 nltk
 numpy
 pillow
+plotly
+dash
+cv2
